@@ -12,6 +12,7 @@ public class IKSystem : MonoBehaviour
     public float DistanceThreshold = 0.05f;
     public GameObject IKTarget;
     public GameObject actualEndPoint;
+    public float InitialOffset = 150.0f;
 
     void Start()
     {
@@ -37,10 +38,12 @@ public class IKSystem : MonoBehaviour
                 curBone = null;
             }
         }
+        angles[1] = InitialOffset;
+        Joints[1].MaxAngle = InitialOffset;
     }
 
 
-    public Vector3 ForwardKinematics(float[] angles)
+    public (Vector3, Quaternion) ForwardKinematics(float[] angles)
     {
         Vector3 prevPoint = Joints[0].transform.position;
         Quaternion rotation = Joints[0].transform.rotation;
@@ -52,13 +55,25 @@ public class IKSystem : MonoBehaviour
 
             prevPoint = nextPoint;
         }
-        return prevPoint;
+        return (prevPoint, rotation);
     }
 
     public float DistanceFromTarget(Vector3 target, float[] angles)
     {
-        Vector3 point = ForwardKinematics(angles);
-        return Vector3.Distance(point, target);
+        (Vector3 endPoint, Quaternion endEffectorRotation) = ForwardKinematics(angles);
+
+        float distancePenalty = Vector3.Distance(endPoint, target);
+        float rotationPenalty =
+        Mathf.Abs( Quaternion.Angle(endEffectorRotation, actualEndPoint.transform.rotation) / 360f );
+            
+        float torsionPenalty = 0;
+        for (int i = 20; i < angles.Length; i++)
+            torsionPenalty += 1.0f/Mathf.Abs(angles[i]);
+        torsionPenalty = Mathf.Clamp(torsionPenalty, 0.0f, 1.0f);
+
+        //float finalError = rotationPenalty + distancePenalty + torsionPenalty;
+        float finalError = distancePenalty + torsionPenalty;
+        return finalError;
     }
     public float PartialGradient(Vector3 target, float[] angles, int i)
     {
@@ -81,7 +96,7 @@ public class IKSystem : MonoBehaviour
 
     public void InverseKinematics(Vector3 target, float[] angles)
     {
-        for (int it = 0; it < 10; it++)
+        for (int it = 0; it < 2; it++)
         {
             float dist = DistanceFromTarget(target, angles);
             if (dist < DistanceThreshold)
@@ -92,7 +107,7 @@ public class IKSystem : MonoBehaviour
                 // Gradient descent
                 // Update : Solution -= LearningRate * Gradient
                 float gradient = PartialGradient(target, angles, i);
-                angles[i] -= (Mathf.Max(Mathf.Pow(i / 4, 3), Joints[i].Weight) * LearningRate * gradient);
+                angles[i] -= (Mathf.Max(Mathf.Pow(i / 4, 3), Joints[i].Weight) * LearningRate * gradient * (1.0f + dist));
                 angles[i] = Mathf.Clamp(angles[i], Joints[i].MinAngle, Joints[i].MaxAngle);
                 if (DistanceFromTarget(target, angles) < DistanceThreshold)
                     return;
@@ -101,7 +116,7 @@ public class IKSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Joints[0].transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
         //Vector3 rot = Joints[0].transform.localRotation.eulerAngles;
@@ -109,14 +124,16 @@ public class IKSystem : MonoBehaviour
         //Joints[0].transform.localRotation = Quaternion.Euler(rot);
 
         //Joints[0].transform.localRotation = Camera.main.transform.rotation;
-        angles[0] = 10.0f * Mathf.Sin(Time.fixedTime); //TODO come back to this
-        //angles[1] = 5.0f * Mathf.Sin(Time.fixedTime);
+        //angles[0] = 10.0f * Mathf.Sin(Time.fixedTime); //TODO come back to this
+        angles[2] = 5.0f * Mathf.Sin(Time.fixedTime);
+ 
+
         InverseKinematics(IKTarget.transform.position, angles);
         for (int i = 0; i < Joints.Length; i++)
         {
             Joints[i].transform.localEulerAngles = angles[i] * Joints[i].Axis;
         }
-        Vector3 point = ForwardKinematics(angles);
-        actualEndPoint.transform.position = point;
+        var point = ForwardKinematics(angles);
+        actualEndPoint.transform.position = point.Item1;
     }
 }

@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Standard
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _SUNDISK_HIGH_QUALITY
-  m_LightmapFlags: 0
+  m_ShaderKeywords: _SUNDISK_HIGH_QUALITY
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -83,9 +83,9 @@ Material:
     - _EnableExternalAlpha: 0
     - _Exposure: 6.65
     - _GlossMapScale: 1
-    - _Glossiness: 0.159
+    - _Glossiness: 0.108
     - _GlossyReflections: 1
-    - _Metallic: 0.905
+    - _Metallic: 0.08
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -109,7 +109,7 @@ Material:
     - _premultiply: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.9339623, g: 0.43614274, b: 0.43614274, a: 1}
+    - _EmissionColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _GroundColor: {r: 0.36899996, g: 0.34899998, b: 0.34099993, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

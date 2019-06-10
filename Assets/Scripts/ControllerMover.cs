@@ -9,6 +9,7 @@ public class ControllerMover : MonoBehaviour
     private float yaw = 0.0f;
     private float pitch = 0.0f;
     private float scale = 1.5f;
+    private float touchPosY = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,29 @@ public class ControllerMover : MonoBehaviour
 
         if (isConnected)
         {
-            transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+            transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+
+            Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
+            if (OVRInput.GetDown(OVRInput.Touch.PrimaryTouchpad)){
+                touchPosY = input.y;
+            }
+            if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
+            {
+
+                if (input.y - touchPosY > 0)
+                {
+                    scale += 1f * Time.deltaTime;
+                }
+                else if (input.y - touchPosY < 0)
+                {
+                    scale -= 1f * Time.deltaTime;
+                }
+                scale = Mathf.Clamp(scale, 0.05f, 2.0f);
+
+            }
+
+
+
         }
         else
         {
@@ -34,12 +57,13 @@ public class ControllerMover : MonoBehaviour
 
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
-                scale += 0.1f;
+                scale += 10f * Time.deltaTime;
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
             {
-                scale -= 0.1f;
+                scale -= 10f * Time.deltaTime;
             }
+            scale = Mathf.Clamp(scale, 0.05f, 2.0f);
         }
 
         IKTarget.transform.position = transform.position + scale * transform.forward;

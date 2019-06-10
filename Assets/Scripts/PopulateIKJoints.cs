@@ -28,8 +28,8 @@ public class PopulateIKJoints
     //            IKJoint joint = curBone.gameObject.AddComponent<IKJoint>();
     //            joint.StartOffset = joint.transform.localPosition;
     //            joint.Axis = axes[i%2];
-    //            joint.MinAngle = -45;
-    //            joint.MaxAngle = 45;
+    //            joint.MinAngle = -45 - i;
+    //            joint.MaxAngle = 45 + i;
 
     //            // add a box collider for every 4th joint 
     //            BoxCollider[] colliders = curBone.gameObject.GetComponents<BoxCollider>();
@@ -51,6 +51,15 @@ public class PopulateIKJoints
     //                //collider.center = curBone.transform.position;
     //                rigidbody.isKinematic = true;
     //                rigidbody.useGravity = false;
+    //            }
+    //            if (i < 5)
+    //            {
+    //                joint.Weight = 2.0f;
+    //            }
+
+    //            if (i > 20)
+    //            {
+    //                joint.Weight = i - 15;
     //            }
 
     //            if (curBone.childCount > 0)
