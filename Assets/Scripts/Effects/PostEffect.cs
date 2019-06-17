@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PostEffect : MonoBehaviour
 {
-    // Start is called before the first frame update
     Camera AttachedCamera;
+
     public Shader PostOutline;
     public Texture PaletteMat;
-    Material PostMat;
+    public Material PostMat;
+    public Color VignetteColor;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class PostEffect : MonoBehaviour
 
         PostMat = new Material(PostOutline);
         PostMat.SetTexture("_PaletteTex", PaletteMat);
+        PostMat.SetColor("_VignetteColor", VignetteColor);
     }
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)

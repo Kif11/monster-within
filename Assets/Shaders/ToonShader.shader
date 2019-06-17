@@ -45,7 +45,7 @@
         float4 rim = rimIntensity * _RimColor;
 
         half4 c;
-        c.rgb = s.Albedo * (lightColor + _AmbientLightColor.rgb + rim.rgb);
+        c.rgb = s.Albedo * (lightColor + (1-lightIntensity)*_AmbientLightColor + rim.rgb);
         c.a = 1.0;
         
         return c;
