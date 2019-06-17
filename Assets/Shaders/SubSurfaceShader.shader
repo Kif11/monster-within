@@ -55,8 +55,9 @@
         
         void vert (inout appdata_full v, out Input o) {
             UNITY_INITIALIZE_OUTPUT(Input,o);
-            v.vertex.z += 0.01*sin(_Time.y + 10.0*v.vertex.x);
+            //v.vertex.z += 0.01*sin(_Time.y + 10.0*v.vertex.x);
             o.customColor = fixed4(0.15, v.texcoord.y/10.0, 0.5*(v.normal.y+v.normal.x), 1.0);
+            
             o.uv_MainTex = v.texcoord;
         }
 

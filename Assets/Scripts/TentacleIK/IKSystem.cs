@@ -67,12 +67,12 @@ public class IKSystem : MonoBehaviour
         Mathf.Abs( Quaternion.Angle(endEffectorRotation, actualEndPoint.transform.rotation) / 360f );
             
         float torsionPenalty = 0;
-        for (int i = 20; i < angles.Length; i++)
+        for (int i = 28; i < angles.Length; i+=1)
             torsionPenalty += 1.0f/Mathf.Abs(angles[i]);
         torsionPenalty = Mathf.Clamp(torsionPenalty, 0.0f, 1.0f);
 
         //float finalError = rotationPenalty + distancePenalty + torsionPenalty;
-        float finalError = distancePenalty + torsionPenalty;
+        float finalError = distancePenalty + 0.06f*torsionPenalty;
         return finalError;
     }
     public float PartialGradient(Vector3 target, float[] angles, int i)
