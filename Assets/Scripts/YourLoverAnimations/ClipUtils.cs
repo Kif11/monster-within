@@ -16,6 +16,7 @@ public class ClipUtils : MonoBehaviour
     {
         postEffect = Camera.main.GetComponent<PostEffect>();
         blinkVal = 0;
+        postEffect.PostMat.SetFloat("_BlinkAmount", 0f);
     }
 
     // Update is called once per frame
@@ -27,8 +28,12 @@ public class ClipUtils : MonoBehaviour
             if (blinkVal > Mathf.PI)
             {
                 blink = false;
+                postEffect.PostMat.SetFloat("_BlinkAmount", 0f);
             }
-            postEffect.PostMat.SetFloat("_BlinkAmount", 2f*Mathf.Sin(blinkVal));
+            else
+            {
+                postEffect.PostMat.SetFloat("_BlinkAmount", 2f*Mathf.Sin(blinkVal));
+            }
         }
     }
 

@@ -71,26 +71,26 @@ Shader "Custom/Post Outline"
             half4 frag(v2f_img i) : COLOR 
             {
 
-                float r2 = (i.uv.x - 0.5) * (i.uv.x - 0.5) + (i.uv.y - 0.5) * (i.uv.y - 0.5);
+                float r2 = (i.uv.x - 0.5 + _BlinkAmount*cos(_Time.y)) * (i.uv.x - 0.5+ _BlinkAmount*cos(_Time.y)) + (i.uv.y - 0.5) * (i.uv.y - 0.5);
                 float2 inputDistort = i.uv;
                 
                 /***  DISTORTION ***/
-                //float k = -0.15;
-                //float f = 0;
-                //float _Distortion = -1+sin(_Time.y);
-                ////only compute the cubic distortion if necessary
-                //if (_Distortion == 0.0)
-                //{
-                //    f = 1 + r2 * k;
-                //}
-                //else 
-                //{
-                //    f = 1 + r2 * (k + _Distortion * sqrt(r2));
-                //};
-                //// get the right pixel for the current position
-                //float x = f*(i.uv.x - 0.5) + 0.5;
-                //float y = f*(i.uv.y - 0.5) + 0.5;
-                //float2 inputDistort = float2(x,y);
+                float k = -0.15;
+                float f = 0;
+                float _Distortion = _BlinkAmount*sin(_Time.y);
+                //only compute the cubic distortion if necessary
+                if (_Distortion == 0.0)
+                {
+                    f = 1 + r2 * k;
+                }
+                else 
+                {
+                    f = 1 + r2 * (k + _Distortion * sqrt(r2));
+                };
+                // get the right pixel for the current position
+                float x = f*(i.uv.x - 0.5) + 0.5;
+                float y = f*(i.uv.y - 0.5) + 0.5;
+                inputDistort = float2(x,y);
                 
                 /***  VIGNETTE ***/
                 float vig = pow(r2,2);
@@ -103,19 +103,25 @@ Shader "Custom/Post Outline"
                 //float vdepth = LinearEyeDepth(d);
                 //float2 adjustedUvs = UnityStereoTransformScreenSpaceTex(inputDistort);
                 //float s = pow(1 - saturate(sobel(adjustedUvs)), 50);
-                 //s+=pow(2,(vdepth-15)/35);
+                // s+=pow(2,(vdepth-15)/35);
                 //if(vdepth > 15){
-                    //s+=pow(2,(vdepth-30)/5);
+                //    s+=pow(2,(vdepth-30)/5);
                 //}
                 
+                half4 col;
+                
                 /***  COLOR PALETTE ***/
-                //half4 col = pow(tex2D(_MainTex, i.uv),0.4545);
+                if(_VignetteAmount > 0){
+                   col = 10*pow(tex2D(_MainTex, inputDistort),2.2);
+                } else {
+                   col = tex2D(_MainTex, inputDistort);
+                }
+
                 //float brightness = 0.2126 * col.r + 0.7152 * col.g + 0.0722 * col.b;
                 //col = tex2D(_PaletteTex, float2(brightness, 0.1));
                 
                 
                 /*** FINAL COMPOSITE ***/
-                half4 col = tex2D(_MainTex, inputDistort);
                 col += _VignetteAmount*vig*_VignetteColor;
                 return (1-blink)*col;
             }

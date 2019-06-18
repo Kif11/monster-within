@@ -1313,7 +1313,7 @@ PrefabInstance:
     - target: {fileID: -1501942915254850977, guid: ec563d9f1107748349d102ccff790be5,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[1]
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2760673307865350415, guid: ec563d9f1107748349d102ccff790be5,
         type: 3}
@@ -1939,7 +1939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &948045459
 Transform:
   m_ObjectHideFlags: 0
@@ -2108,9 +2108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60148cacc1ba748328bf71133994a594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PostOutline: {fileID: 4800000, guid: f3a78a4339a544b7c8153c375b5341ff, type: 3}
+  PostOutline: {fileID: 4800000, guid: 7268d3626ddc34bfca8e9336a4884668, type: 3}
   PaletteMat: {fileID: 2800000, guid: 1f27f891c9ded44679d951b275b95443, type: 3}
   PostMat: {fileID: 0}
+  VignetteColor: {r: 1, g: 0.27058828, b: 0.2782008, a: 0}
 --- !u!1 &976029056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,8 +2216,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983122963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77, y: -0.82, z: 1.87}
-  m_LocalScale: {x: 0.20256, y: 0.33353, z: 0.58692455}
+  m_LocalPosition: {x: 0.27, y: -0.26, z: 0.27}
+  m_LocalScale: {x: 0.06176153, y: 0.06738223, z: 0.3597742}
   m_Children: []
   m_Father: {fileID: 1253870486}
   m_RootOrder: 2
@@ -3555,6 +3556,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tentacleReal
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ba0d49e85aa774b1db8e2cb0ed98de56,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4605809820815178790, guid: ba0d49e85aa774b1db8e2cb0ed98de56,
         type: 3}
