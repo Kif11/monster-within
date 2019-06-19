@@ -6,6 +6,8 @@ public class ControllerMover : MonoBehaviour
 {
     public GameObject IKTarget;
     public float mouseSpeed = 2.0f;
+    public float minReachDistance = 0.05f;
+    public float maxReachDistance = 3.0f;
     private float yaw = 0.0f;
     private float pitch = 0.0f;
     private float scale = 1.5f;
@@ -42,7 +44,7 @@ public class ControllerMover : MonoBehaviour
                 {
                     scale -= 1f * Time.deltaTime;
                 }
-                scale = Mathf.Clamp(scale, 0.05f, 2.0f);
+                scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
 
             }
 
@@ -63,7 +65,7 @@ public class ControllerMover : MonoBehaviour
             {
                 scale -= 10f * Time.deltaTime;
             }
-            scale = Mathf.Clamp(scale, 0.05f, 2.0f);
+            scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
         }
 
         IKTarget.transform.position = transform.position + scale * transform.forward;
