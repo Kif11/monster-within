@@ -7,6 +7,7 @@ Shader "Custom/Post Outline"
         _MainTex("Main Texture",2D)="black"{}
         _SceneTex("Scene Texture",2D)="black"{}
         _PaletteTex("Palette",2D)="black"{}
+        _NoiseTex("Noise",2D)="black"{}
         _Delta ("Delta", Range(0, 1)) = 0.025
         _VignetteAmount ("Vignette Amount", Range(0, 10)) = 0
         _VignetteColor ("Vignette Color", Color) = (1,1,1,1)
@@ -24,6 +25,7 @@ Shader "Custom/Post Outline"
             sampler2D _MainTex;
             sampler2D _CameraDepthTexture;
             sampler2D _PaletteTex;
+            sampler2D _NoiseTex;
 
 
             //<SamplerName>_TexelSize is a float2 that says how much screen space a texel occupies.
@@ -92,8 +94,14 @@ Shader "Custom/Post Outline"
                 float y = f*(i.uv.y - 0.5) + 0.5;
                 inputDistort = float2(x,y);
                 
+                //get noise distortion 
+                float4 noise = tex2D(_NoiseTex, i.uv + 0.15*(_Time.y));
+                inputDistort.xy += 0.0005*_VignetteAmount*noise.xy;
+                
+                
                 /***  VIGNETTE ***/
-                float vig = pow(r2,2);
+                float4 noiseVig = tex2D(_NoiseTex, (i.uv-0.5)*(1.0+0.2*sin(_Time.y)));
+                float vig = pow(r2,2.0);
                 
                 /***  BLINK ***/
                 float blink = clamp(abs(i.uv.y-0.5)+_BlinkAmount,0,1);
@@ -112,17 +120,18 @@ Shader "Custom/Post Outline"
                 
                 /***  COLOR PALETTE ***/
                 if(_VignetteAmount > 0){
-                   col = 10*pow(tex2D(_MainTex, inputDistort),2.2);
+                   col = tex2D(_MainTex, inputDistort);
                 } else {
                    col = tex2D(_MainTex, inputDistort);
                 }
+
 
                 //float brightness = 0.2126 * col.r + 0.7152 * col.g + 0.0722 * col.b;
                 //col = tex2D(_PaletteTex, float2(brightness, 0.1));
                 
                 
                 /*** FINAL COMPOSITE ***/
-                col += _VignetteAmount*vig*_VignetteColor;
+                col += pow(1+noiseVig.x,2.0)*_VignetteAmount*vig*_VignetteColor;
                 return (1-blink)*col;
             }
              
