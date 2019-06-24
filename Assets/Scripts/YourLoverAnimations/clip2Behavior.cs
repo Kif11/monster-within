@@ -14,10 +14,6 @@ public class clip2Behavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Vector3 pos = animator.gameObject.transform.position;
-        pos.y += 0.005f * Mathf.Sin(Time.fixedTime);
-        animator.gameObject.transform.position = pos;
-
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

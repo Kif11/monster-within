@@ -8,6 +8,8 @@ public class PostEffect : MonoBehaviour
 
     public Shader PostOutline;
     public Texture PaletteMat;
+    public Texture NoiseMat;
+
     public Material PostMat;
     public Color VignetteColor;
 
@@ -18,6 +20,7 @@ public class PostEffect : MonoBehaviour
 
         PostMat = new Material(PostOutline);
         PostMat.SetTexture("_PaletteTex", PaletteMat);
+        PostMat.SetTexture("_NoiseTex", NoiseMat);
         PostMat.SetColor("_VignetteColor", VignetteColor);
     }
 

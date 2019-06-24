@@ -10,7 +10,8 @@ public class MetalCollisionDetector : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision with metal");
+        float mag = collision.relativeVelocity.magnitude;
+        audioSource.volume = Mathf.Clamp(Mathf.Pow(mag, 2.0f),0.0f, 1.0f);
         audioSource.Play();
     }
 

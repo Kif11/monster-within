@@ -7,12 +7,8 @@ public class KeybordMover : MonoBehaviour
     public float mouseSpeed = 2.0f;
     public float moveSpeed = 2.0f;
 
-    private float yaw = 0.0f;
-    private float pitch = 0.0f;
-    
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void move(Vector3 direction) {
@@ -21,11 +17,6 @@ public class KeybordMover : MonoBehaviour
 
     void Update()
     {
-        //yaw += mouseSpeed * Input.GetAxis("Mouse X");
-        //pitch -= mouseSpeed * Input.GetAxis("Mouse Y");
-
-        //transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
-
         if (Input.GetKey(KeyCode.W))
             move(transform.forward);
 
