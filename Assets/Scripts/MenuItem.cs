@@ -31,10 +31,13 @@ public class MenuItem : MonoBehaviour
     {
         // start a certain animation 
         // only if we are in idle state 
-        if( animator.GetInteger("menuItemID") < 0)
-        {
+        //if( animator.GetInteger("menuItemID") < 0)
+        //{
             outlineMat.SetFloat("_OutlineIntensity", 2.5f);
+        //drop a sushi, 
+
+        //continue with eating animation
             animator.SetInteger("menuItemID", animatorParam);
-        }
+        //}
     }
 }

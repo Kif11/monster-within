@@ -23,14 +23,20 @@ public class FoodItemAnimator : StateMachineBehaviour
         Vector3 pos = animator.gameObject.transform.position;
         pos.x = -2.0f + Mathf.Sin(Time.fixedTime);
         animator.gameObject.transform.position = pos;
+
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
+        {
+            animator.SetInteger("menuItemID", -1);
+        }
     }
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetInteger("menuItemID", -1);
+        //animator.SetInteger("menuItemID", -1);
         menuMat.SetFloat("_OutlineIntensity", 0.0f);
 
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
         clipUtils.SetHumanMode();
     }
+
 }

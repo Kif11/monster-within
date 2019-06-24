@@ -27,7 +27,7 @@ public class clip4Behaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetInteger("menuItemID", -1);
+        //animator.SetInteger("menuItemID", -1);
         menuMat.SetFloat("_OutlineIntensity", 0.0f);
 
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
