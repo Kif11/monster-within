@@ -6,8 +6,10 @@ public class MenuItem : MonoBehaviour
 {
     private Animator animator;
     private Material outlineMat;
+    private float secondsFromClick;
 
     public GameObject Char;
+    public GameObject prefab;
     public int animatorParam; 
 
     // Start is called before the first frame update
@@ -18,23 +20,37 @@ public class MenuItem : MonoBehaviour
         outlineMat = r.material;
         outlineMat.SetFloat("_OutlineIntensity", 0.0f);
 
-
+        secondsFromClick = 0.0f;
     }
 
     // Update is called once per frame
-    void Update()
+    void RemoveOutline()
     {
-        
+        outlineMat.SetFloat("_OutlineIntensity", 0.0f);
+
+    }
+
+    private void Update()
+    {
+        secondsFromClick += Time.deltaTime;
     }
 
     public void OnClick()
     {
-        // start a certain animation 
-        // only if we are in idle state 
-        if( animator.GetInteger("menuItemID") < 0)
+        if(secondsFromClick < 0.5)
         {
-            outlineMat.SetFloat("_OutlineIntensity", 2.5f);
-            animator.SetInteger("menuItemID", animatorParam);
+            return;
         }
+        // start a certain animation 
+        GameObject anotherSushi = Instantiate(prefab, new Vector3(-0.507f, 1.34f, -2.73f), Quaternion.identity);
+        SushiGlobalData.sushiQueue.Enqueue(anotherSushi);
+
+        // only if we are in idle state 
+        outlineMat.SetFloat("_OutlineIntensity", 2.5f);
+        Invoke("RemoveOutline", 0.5f);
+        animator.SetInteger("menuItemID", animatorParam);
+        secondsFromClick = 0.0f;
+
+
     }
 }

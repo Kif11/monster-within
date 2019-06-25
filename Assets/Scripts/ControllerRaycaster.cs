@@ -10,19 +10,17 @@ public class ControllerRaycaster : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
         RaycastHit hit;
 
         Ray ray = new Ray(transform.position, transform.forward);
         int layerMask = 1 << 9;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) //layer mask!
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             lineRenderer.SetPosition(0, ray.origin);
             lineRenderer.SetPosition(1, ray.origin + ray.direction * hit.distance);
@@ -36,26 +34,10 @@ public class ControllerRaycaster : MonoBehaviour
                 MenuItem menuItem = hit.collider.gameObject.GetComponent<MenuItem>();
                 menuItem.OnClick();
             }
-
-
         }
-        else
+        else 
         {
             lineRenderer.enabled = false;
         }
-
-        //bool isConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote);
-
-        //if (isConnected)
-        //{
-
-
-        //}
-        //else
-        //{
-
-        //}
-
-
     }
 }
