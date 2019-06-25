@@ -10,7 +10,6 @@ public class ControllerRaycaster : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-
     }
 
     // Update is called once per frame

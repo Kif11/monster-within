@@ -42,7 +42,9 @@ public class MenuItem : MonoBehaviour
             return;
         }
         // start a certain animation 
-        Instantiate(prefab, new Vector3(-0.507f, 1.34f, -2.73f), Quaternion.identity);
+        GameObject anotherSushi = Instantiate(prefab, new Vector3(-0.507f, 1.34f, -2.73f), Quaternion.identity);
+        SushiGlobalData.sushiQueue.Enqueue(anotherSushi);
+
         // only if we are in idle state 
         outlineMat.SetFloat("_OutlineIntensity", 2.5f);
         Invoke("RemoveOutline", 0.5f);
