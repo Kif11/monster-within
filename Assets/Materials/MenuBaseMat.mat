@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UdonBowl
-  m_Shader: {fileID: 4800000, guid: 56db57d348abc40b8a74bb0bf7dd09aa, type: 3}
+  m_Name: MenuBaseMat
+  m_Shader: {fileID: 4800000, guid: c15a34825207b40a9b484a2f72f566b4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 91d2be5f8ff89474aa5f2d6c9b1bb85a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 96b9b72ae659b4069a1e542876a6aec1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -66,6 +66,8 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineIntensity: 0.05
+    - _OutlineWidth: 0.05
     - _Parallax: 0.02
     - _RimAmount: 1.2
     - _SmoothnessTextureChannel: 0
@@ -75,6 +77,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AmbientLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.6792453, g: 0.6696333, b: 0.6696333, a: 1}
+    - _Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
