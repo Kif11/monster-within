@@ -10,11 +10,14 @@ public class ClipUtils : MonoBehaviour
     private float blinkVal;
 
     PostEffect postEffect;
+    AudioSource monsterSound;
 
     // Start is called before the first frame update
     void Start()
     {
         postEffect = Camera.main.GetComponent<PostEffect>();
+        monsterSound = gameObject.GetComponent<AudioSource>();
+
         blinkVal = 0;
         postEffect.PostMat.SetFloat("_BlinkAmount", 0f);
     }
@@ -42,12 +45,14 @@ public class ClipUtils : MonoBehaviour
         hand.SetActive(false);
         tentacle.SetActive(true);
         postEffect.PostMat.SetFloat("_VignetteAmount", 8.0f);
+        monsterSound.Play();
     }
     public void SetHumanMode()
     {
         hand.SetActive(true);
         tentacle.SetActive(false);
         postEffect.PostMat.SetFloat("_VignetteAmount", 0.0f);
+        monsterSound.Pause();
     }
     public void Blink()
     {

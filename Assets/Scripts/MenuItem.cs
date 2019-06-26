@@ -64,7 +64,5 @@ public class MenuItem : MonoBehaviour
 
         //play click sound
         audioSource.Play();
-
-
     }
 }
