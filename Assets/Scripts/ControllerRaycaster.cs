@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControllerRaycaster : MonoBehaviour
 {
     private LineRenderer lineRenderer;
+    private MenuItem lastMenuItem;
 
     // Start is called before the first frame update
     void Start()
@@ -19,25 +20,32 @@ public class ControllerRaycaster : MonoBehaviour
 
         Ray ray = new Ray(transform.position, transform.forward);
         int layerMask = 1 << 9;
-
+        if (lastMenuItem)
+        {
+            lastMenuItem.OnUp();
+        }
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             lineRenderer.SetPosition(0, ray.origin);
             lineRenderer.SetPosition(1, ray.origin + ray.direction * hit.distance);
-            lineRenderer.enabled = true;
 
-            //Debug.DrawRay(ray.origin, ray.direction * 2.0f, Color.yellow);
+            MenuItem menuItem = hit.collider.gameObject.GetComponent<MenuItem>();
+            lastMenuItem = menuItem;
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
             {
                 //trigger action of menuItem
-                MenuItem menuItem = hit.collider.gameObject.GetComponent<MenuItem>();
                 menuItem.OnClick();
+            }
+            else
+            {
+                menuItem.OnHover();
             }
         }
         else 
         {
-            lineRenderer.enabled = false;
+            lineRenderer.SetPosition(0, ray.origin);
+            lineRenderer.SetPosition(1, ray.origin + ray.direction);
         }
     }
 }
