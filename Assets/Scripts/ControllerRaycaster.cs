@@ -24,7 +24,6 @@ public class ControllerRaycaster : MonoBehaviour
         {
             lineRenderer.SetPosition(0, ray.origin);
             lineRenderer.SetPosition(1, ray.origin + ray.direction * hit.distance);
-            lineRenderer.enabled = true;
 
             //Debug.DrawRay(ray.origin, ray.direction * 2.0f, Color.yellow);
 
@@ -37,7 +36,8 @@ public class ControllerRaycaster : MonoBehaviour
         }
         else 
         {
-            lineRenderer.enabled = false;
+            lineRenderer.SetPosition(0, ray.origin);
+            lineRenderer.SetPosition(1, ray.origin + ray.direction);
         }
     }
 }

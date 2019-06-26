@@ -7,6 +7,7 @@ public class MenuItem : MonoBehaviour
     private Animator animator;
     private Material outlineMat;
     private float secondsFromClick;
+    private AudioSource audioSource;
 
     public GameObject Char;
     public GameObject prefab;
@@ -15,6 +16,7 @@ public class MenuItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = Char.GetComponent<Animator>();
         Renderer r = GetComponent<Renderer>();
         outlineMat = r.material;
@@ -50,6 +52,9 @@ public class MenuItem : MonoBehaviour
         Invoke("RemoveOutline", 0.5f);
         animator.SetInteger("menuItemID", animatorParam);
         secondsFromClick = 0.0f;
+
+        //play click sound
+        audioSource.Play();
 
 
     }
