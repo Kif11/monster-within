@@ -18,10 +18,10 @@ public class VRMover : MonoBehaviour
     // Quaternion q = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
     // bool isConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote);
 
-    if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
-    {
-      transform.Translate(cam.forward * speed * Time.deltaTime, Space.World);
-    }
+    //if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
+    //{
+    //  transform.Translate(cam.forward * speed * Time.deltaTime, Space.World);
+    //}
 
     if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
     {
