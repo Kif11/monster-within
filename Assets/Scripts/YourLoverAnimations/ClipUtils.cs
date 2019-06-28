@@ -6,6 +6,8 @@ public class ClipUtils : MonoBehaviour
 {
     public GameObject tentacle;
     public GameObject hand;
+    public GameObject ambientSounds;
+
     private bool blink;
     private float blinkVal;
 
@@ -27,7 +29,7 @@ public class ClipUtils : MonoBehaviour
     {
         if (blink)
         {
-            blinkVal += 4*Time.deltaTime; 
+            blinkVal += 4*Time.deltaTime;
             if (blinkVal > Mathf.PI)
             {
                 blink = false;
@@ -46,6 +48,9 @@ public class ClipUtils : MonoBehaviour
         tentacle.SetActive(true);
         postEffect.PostMat.SetFloat("_VignetteAmount", 8.0f);
         monsterSound.Play();
+        AudioController controller = ambientSounds.GetComponent<AudioController>();
+        controller.startFadeInPitch();
+
     }
     public void SetHumanMode()
     {
@@ -53,6 +58,8 @@ public class ClipUtils : MonoBehaviour
         tentacle.SetActive(false);
         postEffect.PostMat.SetFloat("_VignetteAmount", 0.0f);
         monsterSound.Pause();
+        AudioController controller = ambientSounds.GetComponent<AudioController>();
+        controller.startFadeOutPitch();
     }
     public void Blink()
     {
