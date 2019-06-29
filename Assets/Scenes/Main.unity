@@ -5791,7 +5791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Char: {fileID: 142751929}
-  prefab: {fileID: 3069688885710552628, guid: fb5935a98630747f3bd6d8fbdefac747, type: 3}
+  prefab: {fileID: 8966270638970166590, guid: 23afedff4949d4b149efd56d3701a508, type: 3}
   animatorParam: 1
 --- !u!64 &1755772581
 MeshCollider:
