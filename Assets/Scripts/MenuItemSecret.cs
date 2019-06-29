@@ -19,5 +19,6 @@ public class MenuItemSecret : MenuItem
 
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
         clipUtils.SetMonsterMode();
+
     }
 }
