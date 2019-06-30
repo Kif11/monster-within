@@ -96,12 +96,11 @@ Shader "Custom/Post Outline"
                 
                 //get noise distortion 
                 float4 noise = tex2D(_NoiseTex, i.uv + 0.15*(_Time.y));
-                inputDistort.xy += 0.0005*_VignetteAmount*noise.xy;
-                
+                inputDistort.xy += 0.0004*_VignetteAmount*noise.xy;
                 
                 /***  VIGNETTE ***/
                 float4 noiseVig = tex2D(_NoiseTex, (i.uv-0.5)*(1.0+0.2*sin(_Time.y)));
-                float vig = pow(r2,2.0);
+                float vig = pow(r2,2.3);
                 
                 /***  BLINK ***/
                 float blink = clamp(abs(i.uv.y-0.5)+_BlinkAmount,0,1);

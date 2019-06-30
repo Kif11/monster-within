@@ -23,9 +23,9 @@ public class VRMover : MonoBehaviour
     //  transform.Translate(cam.forward * speed * Time.deltaTime, Space.World);
     //}
 
-    if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
-    {
-      transform.Translate(-cam.forward * speed * Time.deltaTime, Space.World);
-    }
+    //if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
+    //{
+    //  transform.Translate(-cam.forward * speed * Time.deltaTime, Space.World);
+    //}
   }
 }
