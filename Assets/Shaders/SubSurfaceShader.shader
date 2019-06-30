@@ -4,6 +4,7 @@
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _NormalMapTex ("NormalMap ", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _Power ("Power", Range(1,10)) = 0.0
@@ -30,6 +31,7 @@
         #include "UnityPBSLighting.cginc"
         
         sampler2D _MainTex;
+        sampler2D _NormalMapTex;
 
         struct Input
         {
@@ -56,7 +58,6 @@
         void vert (inout appdata_full v, out Input o) {
             UNITY_INITIALIZE_OUTPUT(Input,o);
             //v.vertex.z += 0.01*sin(_Time.y + 10.0*v.vertex.x);
-            o.customColor = fixed4(0.15, v.texcoord.y/10.0, 0.5*(v.normal.y+v.normal.x), 1.0);
             
             o.uv_MainTex = v.texcoord;
         }
@@ -65,13 +66,17 @@
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
-            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color + IN.customColor;
+            fixed4 c = _Color * pow(tex2D (_MainTex, IN.uv_MainTex),1.0);
             o.Albedo = c.rgb;
+            o.Emission = 0.5*c.rgb;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
-            o.Smoothness = _Glossiness;
             o.Alpha = c.a;
             
+            //normal map
+            fixed4 normal = tex2D(_NormalMapTex, IN.uv_MainTex);
+            o.Normal = normal.xyz;
+            o.Smoothness = min(5*pow(c.r,2.0),1);
             
             thickness = tex2D (_LocalThickness, IN.uv_MainTex).r;
         }
@@ -95,7 +100,9 @@
          
          //// Final add
          pbr.rgb = pbr.rgb + _SubSurfaceToggle * I * gi.light.color * _SubSurfaceColor;
+         
          return pbr;
+         
          
         }
         ENDCG
