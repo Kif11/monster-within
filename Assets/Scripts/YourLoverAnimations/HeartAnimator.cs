@@ -11,6 +11,7 @@ public class HeartAnimator : StateMachineBehaviour
     {
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
         clipUtils.StartFadeInBlush();
+        clipUtils.StartFadeInHearts();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -26,6 +27,7 @@ public class HeartAnimator : StateMachineBehaviour
     {
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
         clipUtils.StartFadeOutBlush();
+        clipUtils.StartFadeOutHearts();
     }
 
 

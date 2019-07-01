@@ -74,7 +74,7 @@ Shader "Unlit/ToonOutline"
         v2f vert (appdata_full v)
         {
             v2f o;
-            o.pos = UnityObjectToClipPos(v.vertex+0.04*v.normal);   
+            o.pos = UnityObjectToClipPos(v.vertex+0.1*v.normal);   
             return o;
         }
 

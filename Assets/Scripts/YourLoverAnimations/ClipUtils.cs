@@ -7,11 +7,13 @@ public class ClipUtils : MonoBehaviour
     public GameObject tentacle;
     public GameObject hand;
     public GameObject ambientSounds;
+    public GameObject hearts;
     private Renderer renderer;
 
     private bool blink;
     private float blinkVal;
     private float blushAmount;
+    private float heartAmount;
 
     PostEffect postEffect;
     AudioSource monsterSound;
@@ -73,6 +75,34 @@ public class ClipUtils : MonoBehaviour
     {
         blink = true;
         blinkVal = 0;
+    }
+
+    public void StartFadeInHearts()
+    {
+        StopCoroutine("FadeOutHearts");
+        StartCoroutine("FadeInHearts");
+    }
+
+    public void StartFadeOutHearts()
+    {
+        heartAmount = 0.0f;
+    }
+
+    IEnumerator FadeInHearts()
+    {
+        while (heartAmount < 7.3f)
+        {
+            heartAmount += 3.6f * Time.deltaTime;
+            for (int i = 0; i < 2; i ++) 
+            {
+                Transform heart = hearts.transform.GetChild(i);
+                float x = Mathf.Min(heartAmount - 0.3f * i + 1.3f, 7f);
+                float fx = Mathf.Max(0.75f * (Mathf.Sin(-x) + Mathf.Sin(-2f*x) + 1f), 0f);
+                heart.localScale = fx * new Vector3(1f, 1f, 1f);
+            }
+            yield return null;
+        }
+        yield return 0;
     }
 
     public void StartFadeInBlush()

@@ -26,7 +26,7 @@ public class ControllerRaycaster : MonoBehaviour
         }
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
-            lineRenderer.SetPosition(0, ray.origin);
+            lineRenderer.SetPosition(0, ray.origin + 0.2f * ray.direction);
             lineRenderer.SetPosition(1, ray.origin + ray.direction * hit.distance);
 
             MenuItem menuItem = hit.collider.gameObject.GetComponent<MenuItem>();
@@ -44,7 +44,7 @@ public class ControllerRaycaster : MonoBehaviour
         }
         else 
         {
-            lineRenderer.SetPosition(0, ray.origin);
+            lineRenderer.SetPosition(0, ray.origin + 0.2f * ray.direction);
             lineRenderer.SetPosition(1, ray.origin + ray.direction);
         }
     }
