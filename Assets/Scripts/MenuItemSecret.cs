@@ -17,8 +17,9 @@ public class MenuItemSecret : MenuItem
         //play click sound
         audioSource.Play();
 
-        ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
-        clipUtils.SetMonsterMode();
+        //ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
+        //clipUtils.SetMonsterMode();
+
 
     }
 }

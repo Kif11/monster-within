@@ -8,6 +8,7 @@ public class NervousAnimator : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
+        clipUtils.Blink();
         clipUtils.StartFadeInSweat();
     }
 
@@ -20,6 +21,7 @@ public class NervousAnimator : StateMachineBehaviour
     {
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
         clipUtils.StartFadeOutSweat();
+        clipUtils.SetMonsterMode();
     }
 
 
