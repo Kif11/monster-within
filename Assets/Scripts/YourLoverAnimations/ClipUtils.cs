@@ -5,15 +5,19 @@ using UnityEngine;
 public class ClipUtils : MonoBehaviour
 {
     public GameObject tentacle;
+    public GameObject staticTentacles;
     public GameObject hand;
     public GameObject ambientSounds;
     public GameObject hearts;
+    public GameObject tears;
+
     private Renderer renderer;
 
     private bool blink;
     private float blinkVal;
     private float blushAmount;
     private float heartAmount;
+    private float tearAmount;
 
     PostEffect postEffect;
     AudioSource monsterSound;
@@ -27,6 +31,8 @@ public class ClipUtils : MonoBehaviour
         GameObject body = gameObject.transform.Find("body_mesh").gameObject;
         renderer = body.GetComponent<Renderer>();
         blushAmount = 0.0f;
+
+        tearAmount = 0.0f; 
 
         blinkVal = 0;
         postEffect.PostMat.SetFloat("_BlinkAmount", 0f);
@@ -56,6 +62,7 @@ public class ClipUtils : MonoBehaviour
     {
         hand.SetActive(false);
         tentacle.SetActive(true);
+        staticTentacles.SetActive(true);
         postEffect.PostMat.SetFloat("_VignetteAmount", 8.0f);
         monsterSound.Play();
         AudioController controller = ambientSounds.GetComponent<AudioController>();
@@ -66,6 +73,7 @@ public class ClipUtils : MonoBehaviour
     {
         hand.SetActive(true);
         tentacle.SetActive(false);
+        staticTentacles.SetActive(false);
         postEffect.PostMat.SetFloat("_VignetteAmount", 0.0f);
         monsterSound.Pause();
         AudioController controller = ambientSounds.GetComponent<AudioController>();
@@ -75,6 +83,53 @@ public class ClipUtils : MonoBehaviour
     {
         blink = true;
         blinkVal = 0;
+    }
+
+    public void StartFadeInSweat()
+    {
+        StartCoroutine("FadeInSweat");
+        StartCoroutine("BounceSweat");
+    }
+
+    public void StartFadeOutSweat()
+    {
+        StopCoroutine("FadeInSweat");
+        StartCoroutine("FadeOutSweat");
+    }
+
+    IEnumerator FadeOutSweat()
+    {
+        while (tearAmount > 0f)
+        {
+            tearAmount -= Time.deltaTime;
+            tears.transform.localScale = tearAmount * new Vector3(1f, 1f, 1f);
+            yield return null;
+        }
+        StopCoroutine("BounceSweat");
+        yield return 0;
+    }
+
+    IEnumerator FadeInSweat()
+    {
+        while (tearAmount < 1f)
+        {
+            tearAmount += Time.deltaTime;
+            tears.transform.localScale = tearAmount * new Vector3(1f, 1f, 1f);
+            yield return null;
+        }
+        yield return 0;
+    }
+
+    IEnumerator BounceSweat()
+    {
+        while (true)
+        {
+            Vector3 localPos = tears.transform.localPosition;
+            localPos.y = 2.9f + 0.5f * Mathf.Sin(Time.fixedTime);
+            tears.transform.localPosition = localPos;
+            Debug.Log(tears.transform.localPosition);
+            yield return null;
+        }
     }
 
     public void StartFadeInHearts()
