@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: ec563d9f1107748349d102ccff790be5
+guid: 369cac60000484bc1b4adaf46c72d373
 ModelImporter:
   serializedVersion: 25
-  internalIDToNameTable:
-  - first:
-      74: 7930566718376146537
-    second: Base
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,11 +32,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Base
+      name: idle1
       takeName: Base
       internalID: 7930566718376146537
       firstFrame: 1
-      lastFrame: 24
+      lastFrame: 240
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -98,12 +95,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - a7c292b1c727c454cbba09e945085ab7
-  - 1ca11b341743a424e949445c42bacacf
-  - 9a98c7fa4393f4c0d80c86fdf8af3906
-  - 369cac60000484bc1b4adaf46c72d373
-  - 5cd86f2c76a594198a58ed51a77849c6
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
