@@ -25,8 +25,6 @@ public class TextureGenerator : MonoBehaviour
             for (int x = 0; x < resolution; x++)
             {
                 float col = Mathf.PerlinNoise(15f* Mathf.Abs(x-0.5f*resolution) / resolution,15f* Mathf.Abs(y - 0.5f*resolution) / resolution);
-
-                //float col = Mathf.PerlinNoise(5f* Mathf.Abs(Mathf.Sin(2f*3.14f*x/resolution)), 5f * Mathf.Abs(Mathf.Cos(2f * 3.14f * y / resolution)));
                 Color c = new Color(col, col, col);
                 texture.SetPixel(x, y, c);
             }

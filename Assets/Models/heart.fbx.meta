@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 369cac60000484bc1b4adaf46c72d373
+guid: 881758187353240ca8b1b2418c44f882
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
@@ -36,14 +36,14 @@ ModelImporter:
       takeName: Base
       internalID: 7930566718376146537
       firstFrame: 1
-      lastFrame: 119
+      lastFrame: 240
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -115,7 +115,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
