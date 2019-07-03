@@ -21,6 +21,15 @@ case $cmd in
     # Remove project from android device
     adb uninstall $app_name
     ;;
+  "build")
+    shift
+    ovr-platform-util upload-mobile-build --app_id 3023686394315929 --app_secret `cat app-secret` --apk Builds/MonsterWithin.apk --channel alpha --notes $1
+    ;;
   *)
-    echo "Usage: utils remote|log|clear"
+    echo "Usage: utils <cmd>"
+    echo "Commands:"
+    echo "  remote"
+    echo "  log"
+    echo "  clear"
+    echo "  build <comment>"
 esac
