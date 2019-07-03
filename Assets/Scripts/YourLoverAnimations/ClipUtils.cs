@@ -113,7 +113,7 @@ public class ClipUtils : MonoBehaviour
     {
         while (tearAmount < 1f)
         {
-            tearAmount += Time.deltaTime;
+            tearAmount += 0.5f * Time.deltaTime;
             tears.transform.localScale = tearAmount * new Vector3(1f, 1f, 1f);
             yield return null;
         }
@@ -125,9 +125,8 @@ public class ClipUtils : MonoBehaviour
         while (true)
         {
             Vector3 localPos = tears.transform.localPosition;
-            localPos.y = 2.9f + 0.5f * Mathf.Sin(Time.fixedTime);
+            localPos.y = 2.9f + 0.5f * (Mathf.Sin(1.5f * Time.fixedTime) + Mathf.Cos(3f * Time.fixedTime));
             tears.transform.localPosition = localPos;
-            Debug.Log(tears.transform.localPosition);
             yield return null;
         }
     }
