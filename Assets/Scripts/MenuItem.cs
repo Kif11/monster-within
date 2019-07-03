@@ -7,7 +7,7 @@ public class MenuItem : MonoBehaviour
     protected Animator animator;
     protected Material outlineMat;
     protected float secondsFromClick;
-    protected AudioSource audioSource;
+    protected AudioSource[] audioSources;
 
     public GameObject Char;
     public GameObject prefab;
@@ -16,7 +16,7 @@ public class MenuItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSources = GetComponents<AudioSource>();
         animator = Char.GetComponent<Animator>();
         Renderer r = GetComponent<Renderer>();
         outlineMat = r.material;
@@ -32,14 +32,14 @@ public class MenuItem : MonoBehaviour
 
     }
 
-    private void Update()
+    public virtual void Update()
     {
         secondsFromClick += Time.deltaTime;
     }
 
     public void OnHover()
     {
-        outlineMat.SetFloat("_OutlineIntensity", 2.5f);
+        outlineMat.SetFloat("_OutlineIntensity", 1f);
     }
 
     public void OnUp()
@@ -58,11 +58,11 @@ public class MenuItem : MonoBehaviour
         SushiGlobalData.sushiQueue.Enqueue(anotherSushi);
 
         // only if we are in idle state 
-        outlineMat.SetFloat("_OutlineIntensity", 2.5f);
+        outlineMat.SetFloat("_OutlineIntensity", 1f);
         animator.SetInteger("menuItemID", animatorParam);
         secondsFromClick = 0.0f;
 
         //play click sound
-        audioSource.Play();
+        audioSources[0].Play();
     }
 }

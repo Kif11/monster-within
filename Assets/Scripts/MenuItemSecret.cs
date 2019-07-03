@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class MenuItemSecret : MenuItem
 {
+    public float secondsUntilActive = 10f;
+    private bool clicked = false;
+
     public override void OnClick()
     {
-        if(secondsFromClick < 0.5)
+        outlineMat.SetFloat("_OutlineIntensity", 0f);
+        //secret menu item is disabled for 5 seconds
+        if(Time.fixedTime > secondsUntilActive && !clicked)
         {
-            return;
+            animator.SetInteger("menuItemID", animatorParam);
+            audioSources[0].Play();
+            clicked = true;
         }
-        outlineMat.SetFloat("_OutlineIntensity", 2.5f);
-        animator.SetInteger("menuItemID", animatorParam);
-        secondsFromClick = 0.0f;
+        else
+        {
+            audioSources[1].Play();
+        }
+    }
 
-        //play click sound
-        audioSource.Play();
-
-        //ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
-        //clipUtils.SetMonsterMode();
-
-
+    public override void Update()
+    {
+        if (Time.fixedTime > secondsUntilActive && !clicked)
+        {
+            outlineMat.SetFloat("_OutlineIntensity", 0.5f + 0.5f * Mathf.Sin(2f * Time.fixedTime));
+        }
     }
 }

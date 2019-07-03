@@ -39,7 +39,7 @@
         o.Albedo = _Color.rgb * tex2D (_MainTex, IN.uv_MainTex).rgb + _Color.rgb*tex2D (_MainTex, IN.uv_MainTex).a;
         float maxOutline = 1.0 - _OutlineWidth;
         if(IN.uv_MainTex.x < _OutlineWidth ||IN.uv_MainTex.x > maxOutline || IN.uv_MainTex.y < _OutlineWidth || IN.uv_MainTex.y > maxOutline){
-            o.Albedo += _OutlineIntensity*_OutlineColor.rgb;
+            o.Albedo = lerp(o.Albedo,_OutlineColor.rgb,_OutlineIntensity);
         }
         
     }

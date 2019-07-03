@@ -9,7 +9,7 @@
         _RimAmount ("Rim Amount", Range(0, 2)) = 1.2
         _MainTex ("Texture", 2D) = "white" {}
         _OutlineWidth ("Outline Width", Range(0,0.1)) = 0.05
-        _OutlineIntensity ("Outline Intensity", Range(0,2.5)) = 0.05
+        _OutlineIntensity ("Outline Intensity", Range(0,1)) = 0.05
         _OutlineColor ("Outline Color", Color) = (1, 1, 1, 1)
     }
     SubShader
@@ -39,7 +39,7 @@
         o.Albedo = _Color.rgb * tex2D (_MainTex, IN.uv_MainTex).rgb;
         float maxOutline = 1.0 - _OutlineWidth;
         if(IN.uv_MainTex.x < _OutlineWidth ||IN.uv_MainTex.x > maxOutline || IN.uv_MainTex.y < _OutlineWidth || IN.uv_MainTex.y > maxOutline){
-            o.Albedo += _OutlineIntensity*_OutlineColor.rgb;
+            o.Albedo = lerp(o.Albedo,_OutlineColor.rgb,_OutlineIntensity);
         }
     }
     

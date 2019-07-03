@@ -18,6 +18,9 @@ public class ClipUtils : MonoBehaviour
     private float blushAmount;
     private float heartAmount;
     private float tearAmount;
+    private float lerpAmount;
+    private float hopAmount;
+    private Quaternion fromQuaternion;
 
     PostEffect postEffect;
     AudioSource monsterSound;
@@ -32,7 +35,9 @@ public class ClipUtils : MonoBehaviour
         renderer = body.GetComponent<Renderer>();
         blushAmount = 0.0f;
 
-        tearAmount = 0.0f; 
+        tearAmount = 0.0f;
+        lerpAmount = 0.0f;
+        hopAmount = Mathf.PI / 2.0f;
 
         blinkVal = 0;
         postEffect.PostMat.SetFloat("_BlinkAmount", 0f);
@@ -113,7 +118,7 @@ public class ClipUtils : MonoBehaviour
     {
         while (tearAmount < 1f)
         {
-            tearAmount += 0.5f * Time.deltaTime;
+            tearAmount += 0.25f * Time.deltaTime;
             tears.transform.localScale = tearAmount * new Vector3(1f, 1f, 1f);
             yield return null;
         }
@@ -188,6 +193,38 @@ public class ClipUtils : MonoBehaviour
         {
             blushAmount -= Time.deltaTime;
             renderer.material.SetFloat("_BlushAmount", blushAmount);
+            yield return null;
+        }
+        yield return 0;
+    }
+
+    public void StartRunAway()
+    {
+        Quaternion targetQuat = Quaternion.Euler(0, 0, 0);
+        Vector3 targetPos = new Vector3(0f, 0f, 20f);
+        StartCoroutine("RotateToTarget", targetQuat);
+        StartCoroutine("MoveToTarget", targetPos);
+    }
+
+    IEnumerator RotateToTarget(Quaternion target)
+    {
+        fromQuaternion = transform.rotation;
+        while (lerpAmount < 1.0f)
+        {
+            lerpAmount += Time.deltaTime; 
+            transform.rotation = Quaternion.Lerp(fromQuaternion, target, lerpAmount);
+            yield return null;
+        }
+        yield return 0;
+    }
+    IEnumerator MoveToTarget(Vector3 target)
+    {
+        while (transform.position != target)
+        {
+            hopAmount += Time.deltaTime;
+            Vector3 pos = Vector3.MoveTowards(transform.position, target, Time.deltaTime);
+            pos.y = 0.626f + 0.1f * Mathf.Abs(Mathf.Sin(2f * hopAmount) + Mathf.Cos(4f * hopAmount));
+            transform.position = pos;
             yield return null;
         }
         yield return 0;

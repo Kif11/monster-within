@@ -10,12 +10,12 @@ public class MenuItemHeart : MenuItem
         {
             return;
         }
-        outlineMat.SetFloat("_OutlineIntensity", 2.5f);
+        outlineMat.SetFloat("_OutlineIntensity", 1f);
         animator.SetInteger("menuItemID", animatorParam);
         secondsFromClick = 0.0f;
 
         //play click sound
-        audioSource.Play();
+        audioSources[0].Play();
 
         animator.SetInteger("menuItemID", animatorParam);
     }
