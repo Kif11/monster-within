@@ -1067,7 +1067,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dead
+  m_Name: RunAway
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1288,7 +1288,7 @@ AnimatorStateMachine:
     m_Position: {x: 1330, y: -1050, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2501967324488557484}
-    m_Position: {x: 40, y: 330, z: 0}
+    m_Position: {x: 50, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5292106977944948458}
     m_Position: {x: 340, y: 140, z: 0}
