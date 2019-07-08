@@ -16,7 +16,7 @@ public class CrowdBehavior : StateMachineBehaviour
 
         GameObject tableSet = GameObject.Find("TableSetMain");
         Rigidbody rb = tableSet.AddComponent<Rigidbody>();
-        rb.AddForce(new Vector3(-20.0f, -5.0f, 0.0f), ForceMode.Impulse);
+        rb.AddForce(new Vector3(-20.0f, 5.0f, 0.0f), ForceMode.Impulse);
 
         GameObject player = GameObject.Find("Player");
         Vector3 pos = player.transform.position;

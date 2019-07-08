@@ -1517,7 +1517,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &455191847
@@ -2183,7 +2183,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &550499590
@@ -4867,7 +4867,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114805952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef630be9d11564c14a85549d8a606fcf, type: 3}
   m_Name: 
@@ -4882,6 +4882,7 @@ MonoBehaviour:
   - {r: 0.8622794, g: 0.9607843, b: 0.7764706, a: 1}
   - {r: 0.8985858, g: 0.7764706, b: 0.9607843, a: 1}
   - {r: 0.7764706, g: 0.9607843, b: 0.9214921, a: 1}
+  Char: {fileID: 142751929}
 --- !u!1 &1171658280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -640529375812389987, guid: ba0d49e85aa774b1db8e2cb0ed98de56,
@@ -5305,7 +5306,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1283036412
@@ -5810,7 +5811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1443998077
 Transform:
   m_ObjectHideFlags: 0
@@ -6970,7 +6971,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1712127804
@@ -7172,7 +7173,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1755772582
@@ -8410,6 +8411,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3069688885710552628, guid: fb5935a98630747f3bd6d8fbdefac747,
         type: 3}
+    - target: {fileID: 2011563848330333855, guid: 77a3cde2279bc414b93b0f661c9f74c4,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77a3cde2279bc414b93b0f661c9f74c4, type: 3}
 --- !u!4 &7738814747068526122 stripped
