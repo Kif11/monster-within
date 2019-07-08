@@ -10,8 +10,9 @@ public class ClipUtils : MonoBehaviour
     public GameObject ambientSounds;
     public GameObject hearts;
     public GameObject tears;
+    public GameObject raycaster;
 
-    private Renderer renderer;
+    private Renderer charRenderer;
 
     private bool blink;
     private float blinkVal;
@@ -32,7 +33,8 @@ public class ClipUtils : MonoBehaviour
         monsterSound = gameObject.GetComponent<AudioSource>();
 
         GameObject body = gameObject.transform.Find("body_mesh").gameObject;
-        renderer = body.GetComponent<Renderer>();
+        charRenderer = body.GetComponent<Renderer>();
+
         blushAmount = 0.0f;
 
         tearAmount = 0.0f;
@@ -66,6 +68,8 @@ public class ClipUtils : MonoBehaviour
     public void SetMonsterMode()
     {
         hand.SetActive(false);
+        raycaster.SetActive(false);
+
         tentacle.SetActive(true);
         staticTentacles.SetActive(true);
         postEffect.PostMat.SetFloat("_VignetteAmount", 8.0f);
@@ -77,6 +81,8 @@ public class ClipUtils : MonoBehaviour
     public void SetHumanMode()
     {
         hand.SetActive(true);
+        raycaster.SetActive(true);
+
         tentacle.SetActive(false);
         staticTentacles.SetActive(false);
         postEffect.PostMat.SetFloat("_VignetteAmount", 0.0f);
@@ -181,7 +187,7 @@ public class ClipUtils : MonoBehaviour
         while (blushAmount < 1)
         {
             blushAmount += Time.deltaTime;
-            renderer.material.SetFloat("_BlushAmount", blushAmount);
+            charRenderer.material.SetFloat("_BlushAmount", blushAmount);
             yield return null;
         }
         yield return 0;
@@ -192,7 +198,7 @@ public class ClipUtils : MonoBehaviour
         while (blushAmount > 0)
         {
             blushAmount -= Time.deltaTime;
-            renderer.material.SetFloat("_BlushAmount", blushAmount);
+            charRenderer.material.SetFloat("_BlushAmount", blushAmount);
             yield return null;
         }
         yield return 0;
@@ -225,6 +231,26 @@ public class ClipUtils : MonoBehaviour
             Vector3 pos = Vector3.MoveTowards(transform.position, target, Time.deltaTime);
             pos.y = 0.626f + 0.1f * Mathf.Abs(Mathf.Sin(2f * hopAmount) + Mathf.Cos(4f * hopAmount));
             transform.position = pos;
+            yield return null;
+        }
+        yield return 0;
+    }
+
+    public void StartMovePlayerTowards(GameObject player, Vector3 target)
+    {
+        object[] cparams = new object[] { player, target };
+        StartCoroutine("MovePlayerTowards", cparams);
+    }
+
+    IEnumerator MovePlayerTowards(object[] cparams)
+    {
+        GameObject player = (GameObject)cparams[0];
+        Vector3 target = (Vector3)cparams[1];
+
+        while (player.transform.position != target)
+        {
+            Vector3 pos = Vector3.MoveTowards(player.transform.position, target, Time.deltaTime);
+            player.transform.position = pos;
             yield return null;
         }
         yield return 0;

@@ -47,9 +47,6 @@ public class ControllerMover : MonoBehaviour
                 scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
 
             }
-
-
-
         }
         else
         {

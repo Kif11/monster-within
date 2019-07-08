@@ -21,7 +21,7 @@ public class TentacleSwayer : MonoBehaviour
         {
             Transform joint = curBone.gameObject.transform;
             Joints[i] = joint;
-            Rotations[i] = joint.transform.rotation;
+            Rotations[i] = joint.transform.localRotation;
             if (curBone.childCount > 0)
             {
                 curBone = curBone.GetChild(0);
@@ -39,10 +39,10 @@ public class TentacleSwayer : MonoBehaviour
     {
         for (int i = 1; i < Joints.Length; i++)
         {
-            Quaternion rot = Joints[i].rotation;
+            Quaternion rot = Joints[i].localRotation;
             rot.z = (Rotations[i].z + magnitude.z * Mathf.Pow(i / 30f, 3) * Mathf.Sin(Time.fixedTime));
             rot.x = (Rotations[i].x + magnitude.x * Mathf.Pow(i / 30f, 3) * Mathf.Cos(0.5f*Time.fixedTime));
-            Joints[i].rotation = rot;
+            Joints[i].localRotation = rot;
         }
     }
 }

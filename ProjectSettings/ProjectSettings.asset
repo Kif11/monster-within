@@ -255,8 +255,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: .android/kif.keystore'
-  AndroidKeyaliasName: kif
+  AndroidKeystoreName: /Users/snehabelkhale/.android/snay.keystore
+  AndroidKeyaliasName: snay
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

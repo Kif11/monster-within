@@ -86,7 +86,7 @@ Material:
     m_Colors:
     - _AmbientLightColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
     - _BlushColor: {r: 0.6509434, g: 0.11974903, b: 0.18571444, a: 1}
-    - _Color: {r: 0.9622642, g: 0.7761659, b: 0.8455299, a: 1}
+    - _Color: {r: 0.9622641, g: 0.7761659, b: 0.8455299, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
