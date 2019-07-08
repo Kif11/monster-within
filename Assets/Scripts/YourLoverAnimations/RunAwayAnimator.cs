@@ -11,7 +11,5 @@ public class RunAwayAnimator : StateMachineBehaviour
     }
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
-        //clipUtils.SetHumanMode();
     }
 }

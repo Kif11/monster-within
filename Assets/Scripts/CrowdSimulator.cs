@@ -9,7 +9,9 @@ public class CrowdSimulator : MonoBehaviour
     public GameObject crowdPrefab;
     public int CivilianCount;
     public Color[] Tints;
-        
+    public GameObject Char;
+    private Animator animator;
+
     struct Civilian
     {
         public GameObject gameObject;
@@ -33,6 +35,8 @@ public class CrowdSimulator : MonoBehaviour
             Civilians[i].status = 1.0f;
         }
         tintCount = Tints.Length;
+
+        animator = Char.GetComponent<Animator>();
     }
 
     void SetRandomColor(GameObject civilian)
@@ -97,6 +101,7 @@ public class CrowdSimulator : MonoBehaviour
             else
             {
                 hitCount += 0.01f;
+                animator.SetFloat("HealthPoints", hitCount);
             }
             float dot = Vector3.Dot(civilian.transform.up, Vector3.up);
             if(dot < 0.1)
