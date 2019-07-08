@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CrowdBehavior : StateMachineBehaviour
 {
@@ -8,6 +9,10 @@ public class CrowdBehavior : StateMachineBehaviour
     {
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
         clipUtils.SetMonsterMode();
+
+        GameObject crowd = GameObject.Find("Crowd");
+        CrowdSimulator cs = crowd.GetComponent<CrowdSimulator>();
+        cs.enabled = true;
 
         GameObject tableSet = GameObject.Find("TableSetMain");
         Rigidbody rb = tableSet.AddComponent<Rigidbody>();
@@ -25,11 +30,11 @@ public class CrowdBehavior : StateMachineBehaviour
     //    
     //}
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        SceneManager.LoadScene("Dead");
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
