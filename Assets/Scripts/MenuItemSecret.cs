@@ -25,7 +25,7 @@ public class MenuItemSecret : MenuItem
 
     public override void Update()
     {
-        if (Time.fixedTime > secondsUntilActive && !clicked)
+        if (Time.fixedTime > secondsUntilActive && !clicked &&!hovering)
         {
             outlineMat.SetFloat("_OutlineIntensity", 0.5f + 0.5f * Mathf.Sin(2f * Time.fixedTime));
         }

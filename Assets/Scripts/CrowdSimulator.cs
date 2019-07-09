@@ -82,7 +82,7 @@ public class CrowdSimulator : MonoBehaviour
         _lookRotation *= Quaternion.Euler(Vector3.up * 180f);
 
         GameObject anotherCivilian;
-        if (i%3 == 0)
+        if (i%3 == 1)
         {
             anotherCivilian = Instantiate(policePrefab, pos, _lookRotation);
         }

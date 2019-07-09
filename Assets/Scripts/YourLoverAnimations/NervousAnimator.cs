@@ -21,7 +21,7 @@ public class NervousAnimator : StateMachineBehaviour
     {
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
         clipUtils.StartFadeOutSweat();
-        clipUtils.SetMonsterMode();
+        clipUtils.SetMonsterMode(false);
     }
 
 

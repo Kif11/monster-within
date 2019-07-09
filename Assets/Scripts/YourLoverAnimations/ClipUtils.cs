@@ -11,6 +11,7 @@ public class ClipUtils : MonoBehaviour
     public GameObject hearts;
     public GameObject tears;
     public GameObject raycaster;
+    public GameObject IKTarget;
 
     private Renderer charRenderer;
 
@@ -65,24 +66,29 @@ public class ClipUtils : MonoBehaviour
         }
     }
 
-    public void SetMonsterMode()
+    public void SetMonsterMode(bool halfMode)
     {
         hand.SetActive(false);
         raycaster.SetActive(false);
 
+        IKTarget.SetActive(true);
         tentacle.SetActive(true);
-        staticTentacles.SetActive(true);
+        if (!halfMode)
+        {
+            staticTentacles.SetActive(true);
+        }
         postEffect.PostMat.SetFloat("_VignetteAmount", 8.0f);
         monsterSound.Play();
         AudioController controller = ambientSounds.GetComponent<AudioController>();
         controller.startFadeInPitch();
-
     }
+
     public void SetHumanMode()
     {
         hand.SetActive(true);
         raycaster.SetActive(true);
 
+        IKTarget.SetActive(false);
         tentacle.SetActive(false);
         staticTentacles.SetActive(false);
         postEffect.PostMat.SetFloat("_VignetteAmount", 0.0f);

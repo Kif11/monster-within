@@ -8,7 +8,7 @@ public class CrowdBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         ClipUtils clipUtils = animator.gameObject.GetComponent<ClipUtils>();
-        clipUtils.SetMonsterMode();
+        clipUtils.SetMonsterMode(false);
 
         GameObject crowd = GameObject.Find("Crowd");
         CrowdSimulator cs = crowd.GetComponent<CrowdSimulator>();

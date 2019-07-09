@@ -8,6 +8,7 @@ public class MenuItem : MonoBehaviour
     protected Material outlineMat;
     protected float secondsFromClick;
     protected AudioSource[] audioSources;
+    protected bool hovering; 
 
     public GameObject Char;
     public GameObject prefab;
@@ -23,6 +24,7 @@ public class MenuItem : MonoBehaviour
         outlineMat.SetFloat("_OutlineIntensity", 0.0f);
 
         secondsFromClick = 0.0f;
+        hovering = false;
     }
 
     // Update is called once per frame
@@ -40,11 +42,13 @@ public class MenuItem : MonoBehaviour
     public void OnHover()
     {
         outlineMat.SetFloat("_OutlineIntensity", 1f);
+        hovering = true;
     }
 
     public void OnUp()
     {
         outlineMat.SetFloat("_OutlineIntensity", 0.0f);
+        hovering = false;
     }
 
     public virtual void OnClick()
