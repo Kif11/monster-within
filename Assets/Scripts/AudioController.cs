@@ -38,7 +38,6 @@ public class AudioController : MonoBehaviour
         while(cafeMusic.pitch < 1)
         {
             cafeMusic.pitch += (Time.deltaTime);
-            Debug.Log(cafeMusic.pitch);
             yield return null;
         }
         yield return 0;

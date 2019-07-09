@@ -10,7 +10,9 @@ public class CrowdSimulator : MonoBehaviour
     public int CivilianCount;
     public Color[] Tints;
     public GameObject Char;
+    public GameObject HealthHeart;
     private Animator animator;
+    private MeshRenderer healthRenderer;
 
     struct Civilian
     {
@@ -22,7 +24,7 @@ public class CrowdSimulator : MonoBehaviour
     private Civilian[] Civilians;
     private Vector3 center;
     private int tintCount;
-    private float hitCount;
+    private float healthPoints;
 
     void Start()
     {
@@ -37,6 +39,28 @@ public class CrowdSimulator : MonoBehaviour
         tintCount = Tints.Length;
 
         animator = Char.GetComponent<Animator>();
+
+        HealthHeart.SetActive(true);
+        healthRenderer = HealthHeart.GetComponent<MeshRenderer>();
+        healthPoints = 200f;
+        StartCoroutine("FadeInHeart");
+    }
+
+    IEnumerator FadeInHeart ()
+    {
+        float heartScale = 0.0f;
+        Vector3 originalHeartScale = HealthHeart.transform.localScale;
+        HealthHeart.transform.localScale = heartScale * originalHeartScale;
+
+        yield return new WaitForSeconds(6);
+
+        while (heartScale < 1.0f)
+        {
+            HealthHeart.transform.localScale = heartScale * originalHeartScale;
+            heartScale += Time.deltaTime;
+            yield return null;
+        }
+        yield return 0;
     }
 
     void SetRandomColor(GameObject civilian)
@@ -100,8 +124,9 @@ public class CrowdSimulator : MonoBehaviour
             }
             else
             {
-                hitCount += 0.01f;
-                animator.SetFloat("HealthPoints", hitCount);
+                healthPoints -= 0.01f;
+                animator.SetFloat("HealthPoints", healthPoints);
+                healthRenderer.material.SetFloat("_FillAmount", Mathf.Min(healthPoints / 200f,1f));
             }
             float dot = Vector3.Dot(civilian.transform.up, Vector3.up);
             if(dot < 0.1)
@@ -134,13 +159,14 @@ public class CrowdSimulator : MonoBehaviour
 
     IEnumerator OffsetCivilianEntry(int i)
     {
-        yield return new WaitForSeconds(Random.Range(0.0f, 8.0f));
+        float round = 20 * (i % 4) + Random.Range(0.0f, 2.0f);
+        yield return new WaitForSeconds(round);
         InitCivilian(i);
         yield return 0;
     }
 
     void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 100, 20), hitCount.ToString());
+        GUI.Label(new Rect(10, 10, 100, 20), healthPoints.ToString());
     }
 }
