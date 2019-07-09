@@ -159,7 +159,8 @@ public class CrowdSimulator : MonoBehaviour
 
     IEnumerator OffsetCivilianEntry(int i)
     {
-        yield return new WaitForSeconds(Random.Range(0.0f, 8.0f));
+        float round = 20 * (i % 4) + Random.Range(0.0f, 2.0f);
+        yield return new WaitForSeconds(round);
         InitCivilian(i);
         yield return 0;
     }

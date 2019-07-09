@@ -41,7 +41,11 @@ Shader "Unlit/HeartFillOutline"
         UNITY_INITIALIZE_OUTPUT(Input,o);
         o.uv_MainTex = v.texcoord;
         o.vPos = v.vertex;
-        v.vertex.xyz = v.vertex.xyz - 0.4 * (1-_FillAmount) * (abs(v.vertex.y) - sin(5.5 + v.vertex.z)) * v.normal.xyz;
+        
+        float blinkIntensity = 1 - _FillAmount;
+        float b = blinkIntensity * abs(sin((1 + blinkIntensity) * _Time.y));
+            
+        v.vertex.xyz = v.vertex.xyz - 0.15 * b * (abs(v.vertex.y) - sin(5.5 + v.vertex.z)) * v.normal.xyz;
     }
        
     void surf (Input IN, inout SurfaceOutput o) {
@@ -79,12 +83,15 @@ Shader "Unlit/HeartFillOutline"
         Name "Outline"
         Cull front
         CGPROGRAM
+// Upgrade NOTE: excluded shader from DX11; has structs without semantics (struct v2f members finalColor)
+#pragma exclude_renderers d3d11
         #pragma vertex vert
         #pragma fragment frag
         #include "UnityCG.cginc"
 
         struct v2f {
             float4 pos : POSITION;
+            float4 finalColor: TEXCOORD1;
         };
         
         float _FillAmount;
@@ -94,16 +101,18 @@ Shader "Unlit/HeartFillOutline"
         v2f vert (appdata_full v)
         {
             v2f o;
-            v.vertex.xyz = v.vertex.xyz - 0.4 * (1-_FillAmount) * (abs(v.vertex.y) - sin(5.5 + v.vertex.z)) * v.normal.xyz;
+            float blinkIntensity = 1 - _FillAmount;
+            float b = blinkIntensity * abs(sin((1 + blinkIntensity) * _Time.y));
+            v.vertex.xyz = v.vertex.xyz - 0.15 * b * (abs(v.vertex.y) - sin(5.5 + v.vertex.z)) * v.normal.xyz;
+            
             o.pos = UnityObjectToClipPos(v.vertex+0.1*v.normal);   
+            o.finalColor = b * _BlinkColor;
             return o;
         }
 
         half4 frag( v2f i ) : COLOR
         {
-            float blinkIntensity = 1 - _FillAmount;
-            fixed4 finalColor = blinkIntensity * abs(sin((1 + blinkIntensity) * _Time.y)) * _BlinkColor;
-            return finalColor;
+            return i.finalColor;
         }
         ENDCG          
     }
