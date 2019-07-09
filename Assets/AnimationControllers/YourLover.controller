@@ -847,19 +847,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: menuItemID
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: -1
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: HealthPoints
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1401,13 +1401,13 @@ AnimatorStateMachine:
     m_Position: {x: 820, y: 1220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4029930206224811644}
-    m_Position: {x: 990, y: 1350, z: 0}
+    m_Position: {x: 820, y: 1420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 827057070646364275}
-    m_Position: {x: 1070, y: 1180, z: 0}
+    m_Position: {x: 1100, y: 1220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4475042230093220888}
-    m_Position: {x: 1360, y: 1290, z: 0}
+    m_Position: {x: 1430, y: 1220, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
