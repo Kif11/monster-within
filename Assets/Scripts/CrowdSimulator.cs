@@ -93,8 +93,8 @@ public class CrowdSimulator : MonoBehaviour
         }
         Civilians[i].gameObject = anotherCivilian;
         Civilians[i].originalRot = _lookRotation;
-        Civilians[i].status = 0.0f;
-        Civilians[i].stoppingRadius = 1.6f + Random.Range(-0.5f, 0.5f);
+        Civilians[i].status = -1f;
+        Civilians[i].stoppingRadius = 1.3f + Random.Range(-0.5f, 0.5f);
 
         return anotherCivilian;
     }
@@ -124,9 +124,14 @@ public class CrowdSimulator : MonoBehaviour
             }
             else
             {
+                if(Civilians[i].status < 0f)
+                {
+                    AudioSource hitAudio = civilian.GetComponent<AudioSource>();
+                    hitAudio.volume = 1.0f;
+                }
                 healthPoints -= 0.01f;
-                animator.SetFloat("HealthPoints", healthPoints);
                 healthRenderer.material.SetFloat("_FillAmount", Mathf.Min(healthPoints / 200f,1f));
+                Civilians[i].status = 0f;
             }
             float dot = Vector3.Dot(civilian.transform.up, Vector3.up);
             if(dot < 0.1)
@@ -134,6 +139,9 @@ public class CrowdSimulator : MonoBehaviour
                 StartCoroutine("DestroyCivilian", i);
             }
         }
+
+        animator.SetFloat("HealthPoints", healthPoints);
+
     }
 
     void LateUpdate()
@@ -150,16 +158,20 @@ public class CrowdSimulator : MonoBehaviour
         IEnumerator DestroyCivilian(int i)
     {
         Civilians[i].status = 1.0f;
-        yield return new WaitForSeconds(2);
         GameObject civilian = Civilians[i].gameObject;
+        AudioSource hit = civilian.GetComponent<AudioSource>();
+        hit.volume = 0.0f;
+
+        yield return new WaitForSeconds(2);
         Destroy(civilian);
         InitCivilian(i);
+
         yield return 0;
     }
 
     IEnumerator OffsetCivilianEntry(int i)
     {
-        float round = 20 * (i % 4) + Random.Range(0.0f, 2.0f);
+        float round = 30 * (i % 4) + Random.Range(0.0f, 2.0f);
         yield return new WaitForSeconds(round);
         InitCivilian(i);
         yield return 0;

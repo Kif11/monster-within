@@ -4,7 +4,7 @@ using System.Collections;
 public class TentacleRotator : MonoBehaviour
 {
     private Quaternion targetRotation;
-    public GameObject staticTentacles;
+    public GameObject playerBody;
     // Use this for initialization
     void Start()
     {
@@ -19,7 +19,7 @@ public class TentacleRotator : MonoBehaviour
         {
             targetRotation = Quaternion.Euler(0.0f, Camera.main.transform.eulerAngles.y, 0.0f);
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 0.80f);
-        staticTentacles.transform.rotation = transform.rotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 1.6f);
+        playerBody.transform.rotation = transform.rotation;
     }
 }

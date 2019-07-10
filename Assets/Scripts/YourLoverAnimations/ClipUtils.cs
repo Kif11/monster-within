@@ -261,4 +261,19 @@ public class ClipUtils : MonoBehaviour
         }
         yield return 0;
     }
+
+    public void StartMoveTable(Rigidbody table)
+    {
+        StartCoroutine("MoveTable", table);
+    }
+
+    IEnumerator MoveTable(Rigidbody table)
+    {
+        while (table.transform.position.x > -20f)
+        {
+            table.AddForce(new Vector3(-40.0f, 1.0f, 0.0f), ForceMode.Acceleration);
+            yield return null;
+        }
+        yield return 0;
+    }
 }
