@@ -5,7 +5,7 @@ using UnityEngine;
 public class ControllerRaycaster : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    private MenuItem lastMenuItem;
+    private MenuItemBasic lastMenuItem;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class ControllerRaycaster : MonoBehaviour
             lineRenderer.SetPosition(0, ray.origin + 0.2f * ray.direction);
             lineRenderer.SetPosition(1, ray.origin + ray.direction * hit.distance);
 
-            MenuItem menuItem = hit.collider.gameObject.GetComponent<MenuItem>();
+            MenuItemBasic menuItem = hit.collider.gameObject.GetComponent<MenuItemBasic>();
             lastMenuItem = menuItem;
 
             if (Input.GetMouseButton(0) || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))

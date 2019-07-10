@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuItem : MonoBehaviour
+public class MenuItemBasic : MonoBehaviour
 {
     protected Animator animator;
     protected Material outlineMat;

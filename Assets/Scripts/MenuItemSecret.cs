@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuItemSecret : MenuItem
+public class MenuItemSecret : MenuItemBasic
 {
     public float secondsUntilActive = 10f;
     private bool clicked = false;

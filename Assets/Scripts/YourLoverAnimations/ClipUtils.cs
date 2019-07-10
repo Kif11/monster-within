@@ -64,6 +64,11 @@ public class ClipUtils : MonoBehaviour
                 postEffect.PostMat.SetFloat("_BlinkAmount", 2f*Mathf.Sin(blinkVal));
             }
         }
+
+        float hit = postEffect.PostMat.GetFloat("_HitAmount");
+        postEffect.PostMat.SetFloat("_HitAmount", Mathf.Max(hit - Time.deltaTime, 0f));
+
+
     }
 
     public void SetMonsterMode(bool halfMode)
@@ -255,7 +260,7 @@ public class ClipUtils : MonoBehaviour
 
         while (player.transform.position != target)
         {
-            Vector3 pos = Vector3.MoveTowards(player.transform.position, target, Time.deltaTime);
+            Vector3 pos = Vector3.MoveTowards(player.transform.position, target, 0.5f * Time.deltaTime);
             player.transform.position = pos;
             yield return null;
         }
@@ -271,9 +276,41 @@ public class ClipUtils : MonoBehaviour
     {
         while (table.transform.position.x > -20f)
         {
-            table.AddForce(new Vector3(-40.0f, 1.0f, 0.0f), ForceMode.Acceleration);
+            table.AddForce(new Vector3(-40.0f, 10.0f, 0.0f), ForceMode.Acceleration);
             yield return null;
         }
+
+        //now activate the colliders on static tentacles 
+        //EnableStaticTentacleColliders();
+
         yield return 0;
     }
+
+    //void EnableStaticTentacleColliders()
+    //{
+    //    GameObject[] staticTentacleArray;
+    //    staticTentacleArray = GameObject.FindGameObjectsWithTag("Tentacle");
+    //    foreach (GameObject staticTentacle in staticTentacleArray)
+    //    {
+    //        Transform curBone = staticTentacle.transform.GetChild(0);
+    //        int i = 0;
+    //        while (curBone)
+    //        {
+    //            if (i % 8 == 0)
+    //            {
+    //                BoxCollider bcollider = curBone.gameObject.AddComponent<BoxCollider>();
+    //                bcollider.enabled = true;
+    //            }
+    //            if (curBone.childCount > 0)
+    //            {
+    //                curBone = curBone.GetChild(0);
+    //                i++;
+    //            }
+    //            else
+    //            {
+    //                curBone = null;
+    //            }
+    //        }
+    //    }
+    //}
 }

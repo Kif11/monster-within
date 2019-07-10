@@ -44,6 +44,7 @@ public class CrowdSimulator : MonoBehaviour
         healthRenderer = HealthHeart.GetComponent<MeshRenderer>();
         healthPoints = 200f;
         StartCoroutine("FadeInHeart");
+
     }
 
     IEnumerator FadeInHeart ()
@@ -94,7 +95,7 @@ public class CrowdSimulator : MonoBehaviour
         Civilians[i].gameObject = anotherCivilian;
         Civilians[i].originalRot = _lookRotation;
         Civilians[i].status = -1f;
-        Civilians[i].stoppingRadius = 1.3f + Random.Range(-0.5f, 0.5f);
+        Civilians[i].stoppingRadius = 1.3f + Random.Range(-0.25f, 0.25f);
 
         return anotherCivilian;
     }
@@ -113,7 +114,9 @@ public class CrowdSimulator : MonoBehaviour
             GameObject civilian = Civilians[i].gameObject;
             Vector3 pos = civilian.transform.position;
 
-            if (Vector3.Distance(pos, center) > Civilians[i].stoppingRadius)
+            float dist = Vector3.Distance(pos, center);
+
+            if ( dist > Civilians[i].stoppingRadius)
             {
                 Vector3 newPos = Vector3.MoveTowards(pos, center, Time.deltaTime);
                 civilian.transform.position = newPos;
@@ -129,7 +132,7 @@ public class CrowdSimulator : MonoBehaviour
                     AudioSource hitAudio = civilian.GetComponent<AudioSource>();
                     hitAudio.volume = 1.0f;
                 }
-                healthPoints -= 0.01f;
+                healthPoints -= 0.04f;
                 healthRenderer.material.SetFloat("_FillAmount", Mathf.Min(healthPoints / 200f,1f));
                 Civilians[i].status = 0f;
             }
@@ -138,10 +141,14 @@ public class CrowdSimulator : MonoBehaviour
             {
                 StartCoroutine("DestroyCivilian", i);
             }
+
+            if (dist < 0.4)
+            {
+                StartCoroutine("DestroyCivilian", i);
+            }
         }
 
         animator.SetFloat("HealthPoints", healthPoints);
-
     }
 
     void LateUpdate()
@@ -164,6 +171,8 @@ public class CrowdSimulator : MonoBehaviour
 
         yield return new WaitForSeconds(2);
         Destroy(civilian);
+
+        yield return new WaitForSeconds(7);
         InitCivilian(i);
 
         yield return 0;
@@ -171,7 +180,7 @@ public class CrowdSimulator : MonoBehaviour
 
     IEnumerator OffsetCivilianEntry(int i)
     {
-        float round = 30 * (i % 4) + Random.Range(0.0f, 2.0f);
+        float round = 45 * (i % 4) + Random.Range(0.0f, 2.0f);
         yield return new WaitForSeconds(round);
         InitCivilian(i);
         yield return 0;

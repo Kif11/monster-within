@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuItemHeart : MenuItem
+public class MenuItemHeart : MenuItemBasic
 {
     public override void OnClick()
     {

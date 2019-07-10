@@ -12,6 +12,7 @@ Shader "Custom/Post Outline"
         _VignetteAmount ("Vignette Amount", Range(0, 10)) = 0
         _VignetteColor ("Vignette Color", Color) = (1,1,1,1)
         _BlinkAmount ("Blink Amount", Range(0, 500)) = 0
+        _HitAmount ("Hit Amount", Range(0, 1)) = 0
     }
     SubShader 
     {
@@ -34,6 +35,7 @@ Shader "Custom/Post Outline"
             float _VignetteAmount;
             fixed4 _VignetteColor;
             float _BlinkAmount;
+            float _HitAmount;
             
 
             #pragma vertex vert_img
@@ -123,11 +125,12 @@ Shader "Custom/Post Outline"
                 } else {
                    col = tex2D(_MainTex, inputDistort);
                 }
-
+                
+                /*** HIT COLOR ***/
+                col += 0.25*_HitAmount*_VignetteColor*_VignetteColor;
 
                 //float brightness = 0.2126 * col.r + 0.7152 * col.g + 0.0722 * col.b;
                 //col = tex2D(_PaletteTex, float2(brightness, 0.1));
-                
                 
                 /*** FINAL COMPOSITE ***/
                 col += pow(1+noiseVig.x,2.0)*_VignetteAmount*vig*_VignetteColor;

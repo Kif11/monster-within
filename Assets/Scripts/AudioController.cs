@@ -15,7 +15,7 @@ public class AudioController : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        while(cafeMusic.volume < 1)
+        while(cafeMusic.volume < 0.5)
         {
             cafeMusic.volume += (Time.deltaTime * 0.01f);
             yield return null;
