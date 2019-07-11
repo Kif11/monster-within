@@ -12,6 +12,7 @@ public class ClipUtils : MonoBehaviour
     public GameObject tears;
     public GameObject raycaster;
     public GameObject IKTarget;
+    public GameObject spotlightObject;
 
     private Renderer charRenderer;
 
@@ -22,6 +23,8 @@ public class ClipUtils : MonoBehaviour
     private float tearAmount;
     private float lerpAmount;
     private float hopAmount;
+    private Light spotlight;
+    private Light pointlight;
     private Quaternion fromQuaternion;
 
     PostEffect postEffect;
@@ -35,6 +38,8 @@ public class ClipUtils : MonoBehaviour
 
         GameObject body = gameObject.transform.Find("body_mesh").gameObject;
         charRenderer = body.GetComponent<Renderer>();
+        spotlight = spotlightObject.GetComponent<Light>();
+        pointlight = spotlightObject.transform.GetChild(0).gameObject.GetComponent<Light>();
 
         blushAmount = 0.0f;
 
@@ -86,6 +91,8 @@ public class ClipUtils : MonoBehaviour
         monsterSound.Play();
         AudioController controller = ambientSounds.GetComponent<AudioController>();
         controller.startFadeInPitch();
+        StartCoroutine("FlickerLights");
+
     }
 
     public void SetHumanMode()
@@ -100,7 +107,42 @@ public class ClipUtils : MonoBehaviour
         monsterSound.Pause();
         AudioController controller = ambientSounds.GetComponent<AudioController>();
         controller.startFadeOutPitch();
+        StopCoroutine("FlickerLights");
+
     }
+
+    IEnumerator FlickerLights()
+    {
+        float lastFlickerTime = 0f;
+        float flickerLength = 0f;
+        float flickerPauseLength = 3f;
+        while (true)
+        {
+            if(Time.fixedTime - lastFlickerTime > flickerPauseLength)
+            {
+                //start flickering 
+                StartCoroutine("FlickerForLength", Random.Range(0.14f, 0.3f) + Time.fixedTime);
+                lastFlickerTime = Time.fixedTime;
+                flickerPauseLength = Random.Range(1f, 3f);
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator FlickerForLength(float stoppingTime)
+    {
+        float minLightIntensity = 0.8f;
+        float maxLightIntensity = 1f;
+
+        while (Time.fixedTime < stoppingTime)
+        {
+            spotlight.intensity = Random.Range(minLightIntensity, maxLightIntensity);
+            pointlight.intensity = 6.34f * (2.0f * (spotlight.intensity - minLightIntensity) + 0.6f);
+            yield return null;
+        }
+        yield return 0;
+    }
+
     public void Blink()
     {
         blink = true;

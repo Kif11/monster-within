@@ -13,6 +13,7 @@ public class CrowdSimulator : MonoBehaviour
     public GameObject HealthHeart;
     private Animator animator;
     private MeshRenderer healthRenderer;
+    private PostEffect postEffect;
 
     struct Civilian
     {
@@ -39,6 +40,7 @@ public class CrowdSimulator : MonoBehaviour
         tintCount = Tints.Length;
 
         animator = Char.GetComponent<Animator>();
+        postEffect = Camera.main.GetComponent<PostEffect>();
 
         HealthHeart.SetActive(true);
         healthRenderer = HealthHeart.GetComponent<MeshRenderer>();
@@ -148,6 +150,7 @@ public class CrowdSimulator : MonoBehaviour
             }
         }
 
+        postEffect.PostMat.SetFloat("_HealthAmount", healthPoints);
         animator.SetFloat("HealthPoints", healthPoints);
     }
 

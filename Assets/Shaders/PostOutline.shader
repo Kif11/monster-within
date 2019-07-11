@@ -13,6 +13,7 @@ Shader "Custom/Post Outline"
         _VignetteColor ("Vignette Color", Color) = (1,1,1,1)
         _BlinkAmount ("Blink Amount", Range(0, 500)) = 0
         _HitAmount ("Hit Amount", Range(0, 1)) = 0
+        _HealthAmount ("Health Amount", Range(0, 200)) = 200
     }
     SubShader 
     {
@@ -36,6 +37,7 @@ Shader "Custom/Post Outline"
             fixed4 _VignetteColor;
             float _BlinkAmount;
             float _HitAmount;
+            float _HealthAmount;
             
 
             #pragma vertex vert_img
@@ -98,11 +100,12 @@ Shader "Custom/Post Outline"
                 
                 //get noise distortion 
                 float4 noise = tex2D(_NoiseTex, i.uv + 0.15*(_Time.y));
-                inputDistort.xy += 0.0004*_VignetteAmount*noise.xy;
+                float health = pow(max(1-.01*_HealthAmount,0),3);
+                inputDistort.xy += (0.0004*_VignetteAmount*noise.xy + 0.02*health*noise.xy);
                 
                 /***  VIGNETTE ***/
                 float4 noiseVig = tex2D(_NoiseTex, (i.uv-0.5)*(1.0+0.2*sin(_Time.y)));
-                float vig = pow(r2,2.3);
+                float vig = pow(r2,2.3 - 1.2*health);
                 
                 /***  BLINK ***/
                 float blink = clamp(abs(i.uv.y-0.5)+_BlinkAmount,0,1);
