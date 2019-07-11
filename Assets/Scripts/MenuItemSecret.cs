@@ -9,6 +9,11 @@ public class MenuItemSecret : MenuItemBasic
 
     public override void OnClick()
     {
+        if (secondsFromClick < 0.5)
+        {
+            return;
+        }
+
         outlineMat.SetFloat("_OutlineIntensity", 0f);
         //secret menu item is disabled for 5 seconds
         if(Time.fixedTime > secondsUntilActive && !clicked)
@@ -21,10 +26,13 @@ public class MenuItemSecret : MenuItemBasic
         {
             audioSources[1].Play();
         }
+        secondsFromClick = 0.0f;
     }
 
     public override void Update()
     {
+        secondsFromClick += Time.deltaTime;
+
         if (Time.fixedTime > secondsUntilActive && !clicked &&!hovering)
         {
             outlineMat.SetFloat("_OutlineIntensity", 0.5f + 0.5f * Mathf.Sin(2f * Time.fixedTime));
