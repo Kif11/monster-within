@@ -505,6 +505,7 @@ MonoBehaviour:
   tears: {fileID: 1773522070}
   raycaster: {fileID: 9940975}
   IKTarget: {fileID: 1257441460}
+  spotlightObject: {fileID: 508048333}
 --- !u!1 &144826313 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1693302934499607793, guid: e11fedc8608e841fa8355f5017fe370c,
@@ -589,12 +590,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169061109}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27999997, y: 0.7420001, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalRotation: {x: -0.40119094, y: 0.5822764, z: -0.5822764, w: 0.40119094}
+  m_LocalPosition: {x: -0.03411831, y: -0.0788409, z: 0.06877053}
+  m_LocalScale: {x: 6.1301847, y: 0.701741, z: 6.7386127}
   m_Children: []
-  m_Father: {fileID: 1483691237}
-  m_RootOrder: 2
+  m_Father: {fileID: 508048334}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &169061111
 Light:
@@ -1984,7 +1985,8 @@ Transform:
   m_LocalRotation: {x: 0.40119094, y: -0.5822764, z: 0.5822764, w: 0.40119094}
   m_LocalPosition: {x: 0, y: 0.84, z: 0}
   m_LocalScale: {x: 2.923102, y: 3.3185375, z: 1.4250271}
-  m_Children: []
+  m_Children:
+  - {fileID: 169061110}
   m_Father: {fileID: 1483691237}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 158.651, z: 269.517}
@@ -3210,7 +3212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 1483691237}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &719194047
 SphereCollider:
@@ -5557,14 +5559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55bba167acaae4c459e6ef2215ba7b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  outlineMat: {fileID: 0}
-  secondsFromClick: 0
-  audioSources: []
-  hovering: 0
-  Char: {fileID: 142751929}
-  prefab: {fileID: 5958846236937165575, guid: 92d59e1fc110f4405912a2617c65091b, type: 3}
-  animatorParam: 1
 --- !u!65 &1283036411
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6155,7 +6149,6 @@ Transform:
   m_Children:
   - {fileID: 508048334}
   - {fileID: 1958907710}
-  - {fileID: 169061110}
   - {fileID: 719194046}
   m_Father: {fileID: 432414584}
   m_RootOrder: 3
@@ -7327,14 +7320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55bba167acaae4c459e6ef2215ba7b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  outlineMat: {fileID: 0}
-  secondsFromClick: 0
-  audioSources: []
-  hovering: 0
-  Char: {fileID: 142751929}
-  prefab: {fileID: 8966270638970166590, guid: 23afedff4949d4b149efd56d3701a508, type: 3}
-  animatorParam: 1
 --- !u!65 &1755772581
 BoxCollider:
   m_ObjectHideFlags: 0
