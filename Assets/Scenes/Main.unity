@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0045662145, g: 0.0069808895, b: 0.022064207, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2322,7 +2322,7 @@ MonoBehaviour:
   Char: {fileID: 142751929}
   prefab: {fileID: 0}
   animatorParam: 3
-  secondsUntilActive: 10
+  secondsUntilActive: 30
 --- !u!65 &550499589
 BoxCollider:
   m_ObjectHideFlags: 0
