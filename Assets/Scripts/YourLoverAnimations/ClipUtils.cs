@@ -120,7 +120,7 @@ public class ClipUtils : MonoBehaviour
         {
             if(Time.fixedTime - lastFlickerTime > flickerPauseLength)
             {
-                //start flickering 
+                //start flickering
                 StartCoroutine("FlickerForLength", Random.Range(0.14f, 0.3f) + Time.fixedTime);
                 lastFlickerTime = Time.fixedTime;
                 flickerPauseLength = Random.Range(1f, 3f);
@@ -211,7 +211,7 @@ public class ClipUtils : MonoBehaviour
         while (heartAmount < 7.3f)
         {
             heartAmount += 3.6f * Time.deltaTime;
-            for (int i = 0; i < 2; i ++) 
+            for (int i = 0; i < 2; i ++)
             {
                 Transform heart = hearts.transform.GetChild(i);
                 float x = Mathf.Min(heartAmount - 0.3f * i + 1.3f, 7f);
@@ -270,7 +270,7 @@ public class ClipUtils : MonoBehaviour
         fromQuaternion = transform.rotation;
         while (lerpAmount < 1.0f)
         {
-            lerpAmount += Time.deltaTime; 
+            lerpAmount += Time.deltaTime;
             transform.rotation = Quaternion.Lerp(fromQuaternion, target, lerpAmount);
             yield return null;
         }
@@ -322,7 +322,7 @@ public class ClipUtils : MonoBehaviour
             yield return null;
         }
 
-        //now activate the colliders on static tentacles 
+        //now activate the colliders on static tentacles
         //EnableStaticTentacleColliders();
 
         yield return 0;

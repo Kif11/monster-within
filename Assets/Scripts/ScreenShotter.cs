@@ -17,6 +17,7 @@ public class ScreenShotter : MonoBehaviour
         if (Input.GetKey(KeyCode.K))
         {
             string fullPath = Application.dataPath + "/ScreenShots/shot_" + index + ".png";
+            Debug.Log("Screenshot saved to " + fullPath);
             ScreenCapture.CaptureScreenshot(fullPath);
             index += 1.0f;
         }
