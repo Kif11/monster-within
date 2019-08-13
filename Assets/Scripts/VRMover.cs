@@ -10,11 +10,12 @@ public class VRMover : MonoBehaviour
   void Start()
   {
     // This camera is controlled by headset rotation
-    cam = transform.Find("Camera").GetComponent<Transform>();
+    cam = GameObject.Find("CenterEyeAnchor").GetComponent<Transform>();
   }
 
   void Update()
   {
+      transform.position = cam.position;
     // Quaternion q = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
     // bool isConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote);
 

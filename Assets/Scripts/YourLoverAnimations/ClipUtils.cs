@@ -6,7 +6,8 @@ public class ClipUtils : MonoBehaviour
 {
     public GameObject tentacle;
     public GameObject staticTentacles;
-    public GameObject hand;
+    public GameObject hand1;
+    public GameObject hand2;
     public GameObject ambientSounds;
     public GameObject hearts;
     public GameObject tears;
@@ -78,7 +79,8 @@ public class ClipUtils : MonoBehaviour
 
     public void SetMonsterMode(bool halfMode)
     {
-        hand.SetActive(false);
+        hand1.SetActive(false);
+        hand2.SetActive(false);
         raycaster.SetActive(false);
 
         IKTarget.SetActive(true);
@@ -97,7 +99,8 @@ public class ClipUtils : MonoBehaviour
 
     public void SetHumanMode()
     {
-        hand.SetActive(true);
+        hand1.SetActive(true);
+        hand2.SetActive(true);
         raycaster.SetActive(true);
 
         IKTarget.SetActive(false);

@@ -22,20 +22,17 @@ public class ControllerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
         bool isConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote);
+        bool isQuestConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTouch);
 
         if (isConnected)
         {
-            transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
-
             Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
             if (OVRInput.GetDown(OVRInput.Touch.PrimaryTouchpad)){
                 touchPosY = input.y;
             }
             if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
             {
-
                 if (input.y - touchPosY > 0)
                 {
                     scale += 1f * Time.deltaTime;
@@ -45,8 +42,18 @@ public class ControllerMover : MonoBehaviour
                     scale -= 1f * Time.deltaTime;
                 }
                 scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
-
             }
+        } else if (isQuestConnected) {
+            Vector2 input = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+            if(OVRInput.Get(OVRInput.Touch.SecondaryThumbstick)) {
+                if(input.y > 0.1){
+                    scale += (1f + input.y) * Time.deltaTime;
+                } else if(input.y < -0.1){
+                    scale -= (1f - input.y) * Time.deltaTime;
+                }
+                scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
+            }
+
         }
         else
         {
@@ -66,6 +73,5 @@ public class ControllerMover : MonoBehaviour
         }
 
         IKTarget.transform.position = transform.position + scale * transform.forward;
-
     }
 }
