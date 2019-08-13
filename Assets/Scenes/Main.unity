@@ -2462,7 +2462,7 @@ MonoBehaviour:
   Char: {fileID: 142751929}
   prefab: {fileID: 0}
   animatorParam: 3
-  secondsUntilActive: 30
+  secondsUntilActive: 20
 --- !u!65 &550499589
 BoxCollider:
   m_ObjectHideFlags: 0
