@@ -22,10 +22,12 @@ public class ControllerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
-        bool isConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote);
 
-        if (isConnected)
+        bool isGoConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote);
+        bool isGoLeftyConnected = OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote);
+        bool isQuestConnected = OVRInput.IsControllerConnected(OVRInput.Controller.RTouch);
+
+        if (isGoConnected)
         {
             transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
 
@@ -47,6 +49,54 @@ public class ControllerMover : MonoBehaviour
                 scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
 
             }
+        }
+        else if (isGoLeftyConnected)
+        {
+            transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTrackedRemote);
+
+            Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
+            if (OVRInput.GetDown(OVRInput.Touch.PrimaryTouchpad))
+            {
+                touchPosY = input.y;
+            }
+            if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
+            {
+
+                if (input.y - touchPosY > 0)
+                {
+                    scale += 1f * Time.deltaTime;
+                }
+                else if (input.y - touchPosY < 0)
+                {
+                    scale -= 1f * Time.deltaTime;
+                }
+                scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
+
+            }
+        } 
+        else if (isQuestConnected)
+        {
+            transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
+
+            //Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
+            //if (OVRInput.GetDown(OVRInput.Touch.PrimaryTouchpad))
+            //{
+            //    touchPosY = input.y;
+            //}
+            //if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
+            //{
+
+            //    if (input.y - touchPosY > 0)
+            //    {
+            //        scale += 1f * Time.deltaTime;
+            //    }
+            //    else if (input.y - touchPosY < 0)
+            //    {
+            //        scale -= 1f * Time.deltaTime;
+            //    }
+            //    scale = Mathf.Clamp(scale, minReachDistance, maxReachDistance);
+
+            //}
         }
         else
         {
