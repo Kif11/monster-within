@@ -9,7 +9,7 @@ public class TentacleOffsetter : MonoBehaviour
     void Start()
     {
         bool isGoLeftyConnected = OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote);
-        if (true)
+        if (isGoLeftyConnected)
         {
             transform.position = tentacleLeftyPos.transform.position;
             transform.rotation = tentacleLeftyPos.transform.rotation;

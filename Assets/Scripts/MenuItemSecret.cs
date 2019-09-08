@@ -15,9 +15,10 @@ public class MenuItemSecret : MenuItemBasic
         }
 
         outlineMat.SetFloat("_OutlineIntensity", 0f);
-        //secret menu item is disabled for 5 seconds
+        //secret menu item is disabled for x seconds
         if(Time.fixedTime > secondsUntilActive && !clicked)
         {
+            Debug.Log("activated");
             animator.SetInteger("menuItemID", animatorParam);
             audioSources[0].Play();
             clicked = true;

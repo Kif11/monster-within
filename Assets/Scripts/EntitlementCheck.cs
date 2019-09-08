@@ -81,11 +81,11 @@ public class EntitlementCheck : MonoBehaviour
       if (exitAppOnFailure)
       {
         // Implements a default behavior for an entitlement check failure -- log the failure and exit the app.
-        Debug.LogError("Oculus user entitlement check failed. Exiting now.");
+        Debug.LogError("Oculus user entitlement check failed. (KIF): I don't care! Keep the app open!");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-          UnityEngine.Application.Quit();
+        //   UnityEngine.Application.Quit();
 #endif
       }
       else
