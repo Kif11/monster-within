@@ -1,5 +1,8 @@
 cmd=$1
+version="0.6"
 app_name="com.codercat.monsterWithin"
+apk="./Builds/MonsterWithin_v${version}.apk"
+release_notes="ReleaseNotes_v${version}.txt"
 
 case $cmd in
   "remote")
@@ -21,9 +24,25 @@ case $cmd in
     # Remove project from android device
     adb uninstall $app_name
     ;;
+  "keygen")
+    shift
+    # Generate a key for code signing
+    keytool -genkey -alias kif -keyalg RSA -keysize 2048 -validity 365000 -keystore ~/.keystore/
+    ;;
+  "sign")
+    shift
+    # Sign apk for the Oculus store
+    zip -d $apk 'META-INF/*.SF' 'META-INF/*.RSA' # Unsign Unity debug signing
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/.android/kif.keystore $apk kif
+    ;;
+  "sign_verify")
+    shift
+    # Verify apk signature
+    jarsigner -verify -verbose -certs $apk
+    ;;
   "upload")
     shift
-    ovr-platform-util upload-mobile-build --app_id 3023686394315929 --app_secret `cat app-secret` --apk Builds/MonsterWithin_v0.3.apk --channel store --notes $1
+    ovr-platform-util upload-mobile-build --app_id 3023686394315929 --app_secret `cat app-secret` --apk $apk --channel store --notes "`cat $release_notes`"
     ;;
   *)
     echo "Usage: utils <cmd>"
@@ -31,5 +50,8 @@ case $cmd in
     echo "  remote"
     echo "  log"
     echo "  clear"
+    echo "  keygen"
+    echo "  sign"
+    echo "  sign_verify"
     echo "  upload <comment>"
 esac
