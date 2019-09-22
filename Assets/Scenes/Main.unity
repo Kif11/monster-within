@@ -10117,6 +10117,11 @@ PrefabInstance:
       propertyPath: Char
       value: 
       objectReference: {fileID: 142751929}
+    - target: {fileID: 7095427694157786055, guid: c80e74e4bdeb54441a5512220285b7cb,
+        type: 3}
+      propertyPath: handleHands
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7095427695044205324, guid: c80e74e4bdeb54441a5512220285b7cb,
         type: 3}
       propertyPath: m_Mesh
@@ -10127,6 +10132,11 @@ PrefabInstance:
       propertyPath: Char
       value: 
       objectReference: {fileID: 142751929}
+    - target: {fileID: 7095427695154024729, guid: c80e74e4bdeb54441a5512220285b7cb,
+        type: 3}
+      propertyPath: handleHands
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7095427695004108852, guid: c80e74e4bdeb54441a5512220285b7cb,
         type: 3}
       propertyPath: m_Mesh

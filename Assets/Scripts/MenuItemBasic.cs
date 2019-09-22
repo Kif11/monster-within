@@ -18,7 +18,10 @@ public class MenuItemBasic : MonoBehaviour
     void Start()
     {
         audioSources = GetComponents<AudioSource>();
-        animator = Char.GetComponent<Animator>();
+        if (Char)
+        {
+            animator = Char.GetComponent<Animator>();
+        }
         Renderer r = GetComponent<Renderer>();
         outlineMat = r.material;
         outlineMat.SetFloat("_OutlineIntensity", 0.0f);

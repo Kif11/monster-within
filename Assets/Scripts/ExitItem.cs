@@ -5,6 +5,9 @@ using UnityEngine;
 public class ExitItem : MenuItemBasic
 {
     [SerializeField] public string action;
+    [SerializeField] public bool handleHands = true;
+    [SerializeField] GameObject hand1;
+    [SerializeField] GameObject hand2;
 
     public override void OnClick()
     {
@@ -16,11 +19,21 @@ public class ExitItem : MenuItemBasic
         else if (action == "no")
         {
             transform.parent.gameObject.SetActive(false);
-            if (Char.GetComponent<ClipUtils>().isInMonsterMode)
+
+            if (handleHands)
             {
-                Char.GetComponent<ClipUtils>().hand1.SetActive(false);
-                Char.GetComponent<ClipUtils>().hand2.SetActive(false);
+                if (Char.GetComponent<ClipUtils>().isInMonsterMode)
+                {
+                    Char.GetComponent<ClipUtils>().hand1.SetActive(false);
+                    Char.GetComponent<ClipUtils>().hand2.SetActive(false);
+                }
             }
+            else
+            {
+                hand1.SetActive(false);
+                hand2.SetActive(false);
+            }
+
             Time.timeScale = 1.0f;
         }
         outlineMat.SetFloat("_OutlineIntensity", 1f);
@@ -30,8 +43,16 @@ public class ExitItem : MenuItemBasic
 
     public override void Update()
     {
-        Char.GetComponent<ClipUtils>().hand1.SetActive(true);
-        Char.GetComponent<ClipUtils>().hand2.SetActive(true);
+        if (handleHands)
+        {
+            Char.GetComponent<ClipUtils>().hand1.SetActive(true);
+            Char.GetComponent<ClipUtils>().hand2.SetActive(true);
+        }
+        else
+        {
+            hand1.SetActive(true);
+            hand2.SetActive(true);
+        }
         Time.timeScale = 0.0f;
     }
 }
