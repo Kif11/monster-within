@@ -1,0 +1,6 @@
+Addressed the following Oculus Go store requests:
+
+Press back button for option to quit the app
+Left handed configuration support
+Exit button on credit screen
+All additions also supported on Quest.
